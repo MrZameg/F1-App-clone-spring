@@ -24,9 +24,13 @@ export async function GET(req: Request) {
       'p.f1-heading-wide.font-formulaOneWide.tracking-normal.font-normal.non-italic.text-fs-18px.leading-none.normal-case.text-brand-black > span'
     )?.textContent;
 
-    const month = card.querySelector(
-      'span.f1-heading-wide.font-formulaOneWide.tracking-normal.font-normal.non-italic.text-fs-12px.leading-none.uppercase.inline-flex.items-center.px-xs.py-micro.rounded-xxs.bg-brand-white.text-brand-black > span'
-    )?.textContent;
+    const month =
+      card.querySelector(
+        'span.f1-heading-wide.font-formulaOneWide.tracking-normal.font-normal.non-italic.text-fs-12px.leading-none.uppercase.inline-flex.items-center.px-xs.py-micro.rounded-xxs.bg-brand-white.text-brand-black > span'
+      )?.textContent ||
+      card.querySelector(
+        'p.f1-heading-wide.font-formulaOneWide.tracking-normal.font-normal.non-italic.text-fs-12px.leading-none.uppercase.flex.items-center.px-xs.py-micro.rounded-xxs.bg-brand-white.text-brand-black > span'
+      )?.textContent;
 
     const roundString = card.querySelector(
       'p.f1-text.font-titillium.tracking-normal.font-bold.non-italic.uppercase.leading-snug.f1-text__micro.text-fs-15px.text-brand-primary'

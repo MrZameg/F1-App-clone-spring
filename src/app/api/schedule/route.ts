@@ -10,9 +10,13 @@ export async function GET(req: Request) {
   const scheduleCards = await page.locator('.outline-offset-4').evaluateAll((cards) => {
     return cards.map((card) => {
       const id = card.getAttribute('href')?.split('/').pop();
-      const name = card.querySelector(
-        'p.f1-heading.tracking-normal.text-fs-18px.leading-tight.normal-case.font-bold.non-italic.f1-heading__body.font-formulaOne.overflow-hidden'
-      )?.textContent;
+      const name =
+        card.querySelector(
+          'p.f1-heading.tracking-normal.text-fs-18px.leading-tight.normal-case.font-bold.non-italic.f1-heading__body.font-formulaOne.overflow-hidden'
+        )?.textContent ||
+        card.querySelector(
+          'p.f1-heading.tracking-normal.text-fs-22px.leading-tight.normal-case.font-bold.non-italic.f1-heading__body.font-formulaOne.flex.items-center'
+        )?.textContent;
       const circuitName = card.querySelector(
         'p.f1-heading.tracking-normal.text-fs-12px.leading-tight.normal-case.font-normal.non-italic.f1-heading__body.font-formulaOne'
       )?.textContent;
@@ -20,15 +24,18 @@ export async function GET(req: Request) {
         'p.f1-heading-wide.font-formulaOneWide.tracking-normal.font-normal.non-italic.text-fs-18px.leading-none.normal-case.text-brand-black > span'
       )?.textContent;
       const month = card.querySelector(
-        'p.f1-heading-wide.font-formulaOneWide.tracking-normal.font-normal.non-italic.text-fs-12px.leading-none.uppercase.flex.items-center.px-xs.py-micro.rounded-xxs.bg-brand-black.text-brand-white'
+        '.f1-inner-wrapper.flex.flex-col.gap-xxs > :nth-child(2) .whitespace-nowrap'
       )?.textContent;
+
       const roundString = card.querySelector(
         'p.f1-text.font-titillium.tracking-normal.font-bold.non-italic.uppercase.leading-snug.f1-text__micro.text-fs-15px.text-brand-primary'
       )?.textContent;
       const roundParsed = Number(roundString?.match(/\d+/)?.[0]);
-      const flagImageUrl = card
-        .querySelector('f1-inner-wrapper flex flex-row gap-normal items-center > img')
-        ?.getAttribute('src');
+      const flagImageUrl =
+        card
+          .querySelector('img.f1-c-image.ml-auto.mr-0.rounded-xxs.border.border-greyDark')
+          ?.getAttribute('src') ||
+        card.querySelector('img.f1-c-image.ml-auto.mr-0.rounded-xxs')?.getAttribute('src');
       const circuitImageUrl =
         card.querySelector('img.f1-c-image.h-full.w-full.object-contain')?.getAttribute('src') ||
         `https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/${name}.png`;

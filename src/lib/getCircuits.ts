@@ -1,4 +1,4 @@
-interface Circuit {
+export interface Circuit {
   id: string;
   name: string;
   circuitName: string;
@@ -29,7 +29,19 @@ interface Circuit {
 }
 
 export async function getCircuits(): Promise<Circuit[] | null> {
-  return null;
+  try {
+    const response = await fetch('http://localhost:3000/api/schedule');
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch circuits');
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 export async function getNextRound(): Promise<Circuit | null> {

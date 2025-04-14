@@ -1,4 +1,4 @@
-import { DashboardSidebard } from '@/app/(home)/Components/DashboardSidebard';
+import { DashboardSidebard } from '@/app/(routes)/(home)/Components/DashboardSidebard';
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
