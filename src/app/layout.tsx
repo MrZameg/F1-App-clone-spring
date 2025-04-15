@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Rajdhani } from 'next/font/google';
 import './globals.css';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { ClerkProvider } from '@clerk/nextjs';
 
 const rajdhani = Rajdhani({
   weight: ['400', '500', '600', '700'],
@@ -20,15 +21,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
-      <body className={`${rajdhani.variable} antialiased dark`}>
-        <SidebarProvider>
-          <main className="w-full">{children}</main>
-        </SidebarProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+        </head>
+        <body className={`${rajdhani.variable} antialiased dark`}>
+          <SidebarProvider>
+            <main className="w-full">{children}</main>
+          </SidebarProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
