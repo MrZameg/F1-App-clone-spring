@@ -1,5 +1,5 @@
-import { PositionTableSkeleton } from '@/app/(routes)/(home)/Components/PositionTable';
-import { TeamTableSkeleton } from '@/app/(routes)/(home)/Components/TeamTable/TeamTable.skeleton';
+import { PositionTableSkeleton } from '@/app/(routes)/(home)/Components/InfoPositionTable';
+import { TeamTableSkeleton } from '@/app/(routes)/(home)/Components/InfoTeamTable/TeamTable.skeleton';
 import { RaceCardSkeleton } from '@/components/shared/RaceCard/RaceCard.skeleton';
 export default function Loading() {
   return (

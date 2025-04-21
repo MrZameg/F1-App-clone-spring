@@ -1,5 +1,5 @@
-import { PositionTable } from '@/app/(routes)/(home)/Components/PositionTable';
-import { TeamTable } from '@/app/(routes)/(home)/Components/TeamTable';
+import { PositionTable } from '@/app/(routes)/(home)/Components/InfoPositionTable';
+import { TeamTable } from '@/app/(routes)/(home)/Components/InfoTeamTable';
 import { RaceCard } from '@/components/shared/RaceCard';
 import { getNextRound } from '@/lib/getCircuits';
 
