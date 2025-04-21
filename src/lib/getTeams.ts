@@ -9,7 +9,7 @@ interface Team {
 
 export async function getTeams(): Promise<Team[] | null> {
   try {
-    const response = await fetch('http://localhost:3000/api/teams');
+    const response = await fetch(`${process.env.BASE_URL}/api/teams`);
     const data = await response.json();
 
     if (!data) {

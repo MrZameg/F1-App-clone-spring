@@ -11,7 +11,7 @@ interface Driver {
 
 export async function getDrivers(): Promise<Driver[] | null> {
   try {
-    const response = await fetch('http://localhost:3000/api/drivers');
+    const response = await fetch(`${process.env.BASE_URL}/api/drivers`);
     const data = await response.json();
 
     if (!data) {

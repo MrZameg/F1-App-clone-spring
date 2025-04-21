@@ -30,7 +30,7 @@ export interface Circuit {
 
 export async function getCircuits(): Promise<Circuit[] | null> {
   try {
-    const response = await fetch('http://localhost:3000/api/schedule');
+    const response = await fetch(`${process.env.BASE_URL}/api/schedule`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -46,7 +46,7 @@ export async function getCircuits(): Promise<Circuit[] | null> {
 
 export async function getNextRound(): Promise<Circuit | null> {
   try {
-    const response = await fetch('http://localhost:3000/api/schedule/next-round');
+    const response = await fetch(`${process.env.BASE_URL}/api/schedule/next-round`);
     const data = await response.json();
 
     if (!response.ok) {
