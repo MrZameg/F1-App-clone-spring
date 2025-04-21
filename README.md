@@ -4,14 +4,6 @@
 
 This project is a Formula 1 website clone, created for educational and practice purposes. The main goal is to improve web development skills and better understand modern frontend technologies.
 
-## Objectives
-
-- Practice modern and responsive UI development
-- Implement web development best practices
-- Improve understanding of frontend technologies
-- Create a user experience similar to the official F1 website
-- Learn about data and state management in web applications
-
 ## Technologies
 
 - React.js
@@ -22,6 +14,73 @@ This project is a Formula 1 website clone, created for educational and practice 
 - Playwright (Web Scraping)
 - Next.js API Routes
 - Authentication System (Clerk)
+
+## How to Use
+
+### Prerequisites
+
+- Node.js (version 18.x or higher)
+- npm, yarn, or Bun
+- Git
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/f1-clone.git
+   cd f1-clone
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   # Using npm
+   npm install
+
+   # Using yarn
+   yarn install
+
+   # Using Bun
+   bun install
+   ```
+
+3. Set up environment variables:
+   - Create a `.env.local` file in the root directory
+   - Add your Clerk authentication keys:
+     ```
+     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
+     CLERK_SECRET_KEY=your_secret_key
+     ```
+
+### Running the Project
+
+1. Start the development server:
+
+   ```bash
+   # Using npm
+   npm run dev
+
+   # Using yarn
+   yarn dev
+
+   # Using Bun
+   bun dev
+   ```
+
+2. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
+
+### API Usage
+
+You can access the API endpoints directly:
+
+- Driver statistics: `http://localhost:3000/api/drivers/statistics?season=2025`
+- Team statistics: `http://localhost:3000/api/teams/statistics?season=2025`
+- Schedule: `http://localhost:3000/api/schedule`
+- Next race: `http://localhost:3000/api/schedule/next-round`
 
 ## Web Scraping
 
