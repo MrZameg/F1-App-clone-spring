@@ -21,6 +21,7 @@ This project is a Formula 1 website clone, created for educational and practice 
 - API Integration
 - Playwright (Web Scraping)
 - Next.js API Routes
+- Authentication System (Clerk)
 
 ## Web Scraping
 
@@ -64,6 +65,18 @@ The information is obtained ethically and respecting the terms of use and robots
   - Country
   - Driver image
 
+### GET /api/drivers/statistics
+
+- Returns detailed statistics for all drivers in the specified season (defaults to current year)
+- Parameters:
+  - `season`: Optional parameter to specify the year (e.g., 2024, 2025)
+- Information per driver:
+  - Position in the championship
+  - Driver details (name, last name, abbreviated code, ID)
+  - Country
+  - Team information (name, ID)
+  - Points earned
+
 ### GET /api/teams
 
 - Returns the complete list of F1 teams
@@ -73,6 +86,26 @@ The information is obtained ethically and respecting the terms of use and robots
   - Points
   - Team logo
   - Current car image
+
+### GET /api/teams/statistics
+
+- Returns detailed statistics for all teams in the specified season (defaults to current year)
+- Parameters:
+  - `season`: Optional parameter to specify the year (e.g., 2024, 2025)
+- Information per team:
+  - Position in the championship
+  - Team name
+  - Points earned
+  - Team ID
+
+## Authentication
+
+The project includes a complete authentication system with the following features:
+
+- User registration (sign-up)
+- User login (sign-in)
+- Protected routes for authenticated users
+- Custom layout for authentication pages
 
 ## Disclaimer
 
