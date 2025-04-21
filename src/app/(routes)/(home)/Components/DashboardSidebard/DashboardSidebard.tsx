@@ -1,29 +1,42 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import {
+  SidebarFooter,
   SidebarGroupContent,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { SidebarGroupLabel } from '@/components/ui/sidebar';
 import { Sidebar, SidebarContent, SidebarGroup } from '@/components/ui/sidebar';
+import { SignInButton, SignOutButton, useAuth, useUser } from '@clerk/nextjs';
 import {
   Calendar,
   ChartNoAxesColumn,
   HeartIcon,
   HistoryIcon,
   HomeIcon,
+  LogInIcon,
+  LogOutIcon,
   UserIcon,
 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export function DashboardSidebard() {
   const pathname = usePathname();
+  const { user } = useUser();
 
   return (
     <Sidebar>
+      {user && (
+        <SidebarHeader>
+          <h1 className="p-2 text-3xl font-bold">Hi, {user?.firstName}</h1>
+        </SidebarHeader>
+      )}
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="font-bold mb-4 text-base">
@@ -76,55 +89,85 @@ export function DashboardSidebard() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link
-                    href="/favorites"
-                    className={`${
-                      pathname === '/favorites'
-                        ? 'font-bold text-sidebar-accent bg-sidebar-accent-foreground'
-                        : 'font-medium'
-                    }`}
-                  >
-                    <HeartIcon />
-                    <span className="text-lg">Favortie drivers</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link
-                    href="/history"
-                    className={`${
-                      pathname === '/history'
-                        ? 'font-bold text-sidebar-accent bg-sidebar-accent-foreground'
-                        : 'font-medium'
-                    }`}
-                  >
-                    <HistoryIcon />
-                    <span className="text-lg">History</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link
-                    href="/user"
-                    className={`${
-                      pathname === '/user'
-                        ? 'font-bold text-sidebar-accent bg-sidebar-accent-foreground'
-                        : 'font-medium'
-                    }`}
-                  >
-                    <UserIcon />
-                    <span className="text-lg">User</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+
+              {user ? (
+                <>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link
+                        href="/favorites"
+                        className={`${
+                          pathname === '/favorites'
+                            ? 'font-bold text-sidebar-accent bg-sidebar-accent-foreground'
+                            : 'font-medium'
+                        }`}
+                      >
+                        <HeartIcon />
+                        <span className="text-lg">Favortie drivers</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link
+                        href="/history"
+                        className={`${
+                          pathname === '/history'
+                            ? 'font-bold text-sidebar-accent bg-sidebar-accent-foreground'
+                            : 'font-medium'
+                        }`}
+                      >
+                        <HistoryIcon />
+                        <span className="text-lg">History</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link
+                        href="/user"
+                        className={`${
+                          pathname === '/user'
+                            ? 'font-bold text-sidebar-accent bg-sidebar-accent-foreground'
+                            : 'font-medium'
+                        }`}
+                      >
+                        <Image src={user.imageUrl} alt="User avatar" width={20} height={20} />
+                        <span className="text-lg">User settings</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </>
+              ) : (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <SignInButton>
+                      <Button variant="outline" size="icon" className="cursor-pointer">
+                        <LogInIcon />
+                        <span className="text-lg">Login</span>
+                      </Button>
+                    </SignInButton>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      {user && (
+        <SidebarFooter className="py-4">
+          <SignOutButton redirectUrl="/">
+            <Button
+              variant="destructive"
+              size="icon"
+              className="flex items-center gap-2 cursor-pointer w-full py-2 px-4 hover:font-bold"
+            >
+              <LogOutIcon />
+              <span className="text-lg">Logout</span>
+            </Button>
+          </SignOutButton>
+        </SidebarFooter>
+      )}
     </Sidebar>
   );
 }
