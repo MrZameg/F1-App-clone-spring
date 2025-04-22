@@ -12,7 +12,6 @@ import Link from 'next/link';
 
 export async function DriversStatisticsTable() {
   const drivers = await getDriverStatistics(new Date().getFullYear().toString());
-  console.log(drivers);
 
   return (
     <div className="w-full border rounded-lg p-2">
