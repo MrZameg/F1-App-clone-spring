@@ -1,7 +1,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { DriversStatisticsTable } from './components/DriversStatisticsTable';
-import { TeamsStatisticsTable } from './components/TeamsStatisticsTable';
-export default function StatisticsPage() {
+import { DriversStatisticsTable } from '../../../components/shared/DriversStatisticsTable';
+import { TeamsStatisticsTable } from '../../../components/shared/TeamsStatisticsTable';
+import { getDriverStatistics } from '@/lib/getDrivers';
+import { getTeamStatistics } from '@/lib/getTeams';
+
+export default async function StatisticsPage() {
+  const drivers = await getDriverStatistics(new Date().getFullYear().toString());
+  const teams = await getTeamStatistics(new Date().getFullYear().toString());
+
   return (
     <div className="w-full flex justify-center items-center">
       <Tabs defaultValue="drivers" className="w-full flex flex-col items-center justify-center">
@@ -20,10 +26,10 @@ export default function StatisticsPage() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="drivers">
-          <DriversStatisticsTable />
+          <DriversStatisticsTable drivers={drivers} />
         </TabsContent>
         <TabsContent value="teams">
-          <TeamsStatisticsTable />
+          <TeamsStatisticsTable teams={teams} />
         </TabsContent>
       </Tabs>
     </div>

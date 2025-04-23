@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { DriversStatisticsTableSkeleton } from './components/DriversStatisticsTable/DriversStatisticsTable.skeleton';
-import { TeamsStatisticsTableSkeleton } from './components/TeamsStatisticsTable/TeamsStatisticsTable.skeleton';
+import { DriversStatisticsTableSkeleton } from '../../../components/shared/DriversStatisticsTable/DriversStatisticsTable.skeleton';
+import { TeamsStatisticsTableSkeleton } from '../../../components/shared/TeamsStatisticsTable/TeamsStatisticsTable.skeleton';
 
 export default function Loading() {
   return (
