@@ -1,5 +1,6 @@
 export interface DriverStatisticsTableProps {
   drivers: DriverStatistics[] | null;
+  season?: string;
 }
 
 export interface DriverStatistics {

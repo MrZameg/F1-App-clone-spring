@@ -7,6 +7,7 @@ import SelectSeason from '../SelectSeason/SelectSeason';
 
 export function HistoryTable() {
   const [season, setSeason] = useState('2024');
+  const [selectedTab, setSelectedTab] = useState('drivers');
 
   return (
     <Tabs
@@ -15,18 +16,31 @@ export function HistoryTable() {
     >
       <h1 className="text-2xl font-bold">Standings History {season}</h1>
       <TabsList className="w-full">
-        <TabsTrigger className="cursor-pointer" value="drivers">
+        <TabsTrigger
+          className="cursor-pointer"
+          value="drivers"
+          onClick={() => setSelectedTab('drivers')}
+        >
           Drivers
         </TabsTrigger>
-        <TabsTrigger className="cursor-pointer" value="teams">
+        <TabsTrigger
+          className="cursor-pointer"
+          value="teams"
+          onClick={() => setSelectedTab('teams')}
+        >
           Teams
         </TabsTrigger>
-        <TabsTrigger className="pointer-events-none opacity-50" value="races">
+        <TabsTrigger
+          className="pointer-events-none opacity-50"
+          value="races"
+          onClick={() => setSelectedTab('races')}
+        >
           Races
         </TabsTrigger>
       </TabsList>
 
       <SelectSeason setSeason={setSeason} />
+      {selectedTab === 'drivers' && <p>Filter by driver name</p>}
 
       <TabsContent value="drivers">
         <DriversHistoryStandings season={season} />

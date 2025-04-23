@@ -3,9 +3,9 @@ import { HistoryStandingsTableProps } from './HistoryTables.types';
 import {
   DriversStatisticsTable,
   DriversStatisticsTableSkeleton,
+  DriverStatistics,
 } from '@/components/shared/DriversStatisticsTable';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { DriverStatistics } from '@/components/shared/DriversStatisticsTable/DriverStatisticsTable.types';
+import { useCallback, useEffect, useState } from 'react';
 
 export function DriversHistoryStandings(props: HistoryStandingsTableProps) {
   const { season } = props;

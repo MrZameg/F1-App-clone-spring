@@ -1,10 +1,10 @@
-import { TeamStatistics } from '@/components/shared/TeamsStatisticsTable/TeamsStatisticsTable.types';
 import { HistoryStandingsTableProps } from './HistoryTables.types';
 import { getTeamStatistics } from '@/lib/getTeams';
 import { useCallback, useEffect, useState } from 'react';
 import {
   TeamsStatisticsTable,
   TeamsStatisticsTableSkeleton,
+  TeamStatistics,
 } from '@/components/shared/TeamsStatisticsTable';
 
 export function TeamsHistoryStandings(props: HistoryStandingsTableProps) {

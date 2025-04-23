@@ -11,13 +11,13 @@ import Link from 'next/link';
 import { DriverStatisticsTableProps } from './DriverStatisticsTable.types';
 
 export function DriversStatisticsTable(props: DriverStatisticsTableProps) {
-  const { drivers } = props;
+  const { drivers, season } = props;
 
   return (
     <div className="w-full border rounded-lg p-2">
       <Table className="w-full">
         <TableCaption>
-          Drivers Statistics for selected season {new Date().getFullYear()}
+          Drivers Statistics for selected season {season ? season : new Date().getFullYear()}
         </TableCaption>
         <TableHeader>
           <TableRow className="text-base">

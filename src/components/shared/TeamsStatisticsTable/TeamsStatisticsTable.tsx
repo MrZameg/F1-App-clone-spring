@@ -11,12 +11,14 @@ import Link from 'next/link';
 import { TeamsStatisticsTableProps } from './TeamsStatisticsTable.types';
 
 export function TeamsStatisticsTable(props: TeamsStatisticsTableProps) {
-  const { teams } = props;
+  const { teams, season } = props;
 
   return (
     <div className="w-full border rounded-lg p-2">
       <Table className="w-full">
-        <TableCaption>Teams Statistics for selected season {new Date().getFullYear()}</TableCaption>
+        <TableCaption>
+          Teams Statistics for selected season {season ? season : new Date().getFullYear()}
+        </TableCaption>
         <TableHeader>
           <TableRow className="text-base">
             <TableHead>Position</TableHead>
