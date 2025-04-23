@@ -28,7 +28,7 @@ interface DriverStatistics {
 
 export async function getDrivers(): Promise<Driver[] | null> {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/drivers`);
+    const response = await fetch(`${process.env.BASE_URL || 'http://localhost:3000'}/api/drivers`);
     const data = await response.json();
 
     if (!data) {
@@ -44,7 +44,9 @@ export async function getDrivers(): Promise<Driver[] | null> {
 
 export async function getDriverStatistics(season: string): Promise<DriverStatistics[] | null> {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/drivers/statistics?season=${season}`);
+    const response = await fetch(
+      `${process.env.BASE_URL || 'http://localhost:3000'}/api/drivers/statistics?season=${season}`
+    );
     const data = await response.json();
 
     if (!data) {

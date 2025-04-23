@@ -7,11 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { getDriverStatistics } from '@/lib/getDrivers';
 import Link from 'next/link';
+import { DriverStatisticsTableProps } from './DriverStatisticsTable.types';
 
-export async function DriversStatisticsTable() {
-  const drivers = await getDriverStatistics(new Date().getFullYear().toString());
+export function DriversStatisticsTable(props: DriverStatisticsTableProps) {
+  const { drivers } = props;
 
   return (
     <div className="w-full border rounded-lg p-2">

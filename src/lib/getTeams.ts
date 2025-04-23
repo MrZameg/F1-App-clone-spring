@@ -16,7 +16,7 @@ interface TeamStatistics {
 
 export async function getTeams(): Promise<Team[] | null> {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/teams`);
+    const response = await fetch(`${process.env.BASE_URL || 'http://localhost:3000'}/api/teams`);
     const data = await response.json();
 
     if (!data) {
@@ -32,7 +32,9 @@ export async function getTeams(): Promise<Team[] | null> {
 
 export async function getTeamStatistics(season: string): Promise<TeamStatistics[] | null> {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/teams/statistics?season=${season}`);
+    const response = await fetch(
+      `${process.env.BASE_URL || 'http://localhost:3000'}/api/teams/statistics?season=${season}`
+    );
     const data = await response.json();
 
     if (!data) {

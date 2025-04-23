@@ -7,11 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { getTeamStatistics } from '@/lib/getTeams';
 import Link from 'next/link';
+import { TeamsStatisticsTableProps } from './TeamsStatisticsTable.types';
 
-export async function TeamsStatisticsTable() {
-  const teams = await getTeamStatistics(new Date().getFullYear().toString());
+export function TeamsStatisticsTable(props: TeamsStatisticsTableProps) {
+  const { teams } = props;
 
   return (
     <div className="w-full border rounded-lg p-2">
