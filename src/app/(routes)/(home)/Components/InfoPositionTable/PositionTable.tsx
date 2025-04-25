@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/table';
 import { getDrivers } from '@/lib/getDrivers';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export async function PositionTable() {
   const drivers = await getDrivers();
@@ -31,13 +32,15 @@ export async function PositionTable() {
               <TableRow key={driver.id}>
                 <TableCell>
                   <div className="flex justify-center items-center">
-                    <Image
-                      alt={`image of ${driver.name}`}
-                      src={driver.imageUrl}
-                      width={70}
-                      height={70}
-                      priority
-                    />
+                    <Link href={`/driver-info/${driver.id}`}>
+                      <Image
+                        alt={`image of ${driver.name}`}
+                        src={driver.imageUrl}
+                        width={70}
+                        height={70}
+                        priority
+                      />
+                    </Link>
                   </div>
                 </TableCell>
                 <TableCell>
@@ -46,7 +49,9 @@ export async function PositionTable() {
                   </span>
                 </TableCell>
                 <TableCell className="px-4">
-                  {driver.name} {driver.surname}
+                  <Link href={`/driver-info/${driver.id}`}>
+                    {driver.name} {driver.surname}
+                  </Link>
                 </TableCell>
                 <TableCell className="px-4">{driver.team}</TableCell>
                 <TableCell className="px-4">{driver.country}</TableCell>
