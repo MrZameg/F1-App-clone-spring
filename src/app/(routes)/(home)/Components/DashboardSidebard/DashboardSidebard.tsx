@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/sidebar';
 import { SidebarGroupLabel } from '@/components/ui/sidebar';
 import { Sidebar, SidebarContent, SidebarGroup } from '@/components/ui/sidebar';
-import { SignInButton, SignOutButton, useAuth, useUser } from '@clerk/nextjs';
+import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
 import {
   Calendar,
   ChartNoAxesColumn,
@@ -20,7 +20,6 @@ import {
   HomeIcon,
   LogInIcon,
   LogOutIcon,
-  UserIcon,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';

@@ -1,4 +1,4 @@
-import { RaceCard, RaceCardSkeleton } from '@/components/shared/RaceCard';
+import { RaceCard } from '@/components/shared/RaceCard';
 import { getCircuits } from '@/lib/getCircuits';
 
 export default async function SchedulePage() {

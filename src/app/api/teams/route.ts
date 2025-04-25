@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 
-export async function GET(req: Request) {
+export async function GET() {
   const browser = await chromium.launch({ headless: true });
 
   const page = await browser.newPage();

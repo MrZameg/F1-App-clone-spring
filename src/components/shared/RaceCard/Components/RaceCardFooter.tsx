@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { CardFooter } from '@/components/ui/card';
 import { Circuit } from '@/lib/getCircuits';
-import { useUser } from '@clerk/nextjs';
-import { auth } from '@clerk/nextjs/server';
 
 interface RaceCardFooterProps {
   isFeaturedCard?: boolean;

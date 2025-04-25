@@ -21,7 +21,7 @@ export function DriversHistoryStandings(props: HistoryStandingsTableProps) {
 
   useEffect(() => {
     getDrivers();
-  }, [season]);
+  }, [season, getDrivers]);
 
   if (isLoading) {
     return <DriversStatisticsTableSkeleton />;

@@ -21,7 +21,7 @@ export function TeamsHistoryStandings(props: HistoryStandingsTableProps) {
 
   useEffect(() => {
     getTeams();
-  }, [season]);
+  }, [season, getTeams]);
 
   if (isLoading) {
     return <TeamsStatisticsTableSkeleton />;
