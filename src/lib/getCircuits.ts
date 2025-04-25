@@ -28,20 +28,18 @@ export interface Circuit {
   };
 }
 
-// Helper to determine if we're in a browser environment
-const isBrowser = typeof window !== 'undefined';
+// Helper to check if we're during build/SSR
+const isServer = typeof window === 'undefined';
 
 export async function getCircuits(): Promise<Circuit[] | null> {
-  try {
-    // Skip fetch during build/SSR if we're not in the browser
-    if (!isBrowser && process.env.NODE_ENV === 'production') {
-      console.log('Skipping API call during build for /api/schedule');
-      return [];
-    }
+  // Skip during build/SSR in production
+  if (isServer && process.env.NODE_ENV === 'production') {
+    console.log('Skipping API call during build for /api/schedule');
+    return [];
+  }
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/schedule`
-    );
+  try {
+    const response = await fetch(`${process.env.BASE_URL || 'http://localhost:3000'}/api/schedule`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -56,15 +54,15 @@ export async function getCircuits(): Promise<Circuit[] | null> {
 }
 
 export async function getNextRound(): Promise<Circuit | null> {
-  try {
-    // Skip fetch during build/SSR if we're not in the browser
-    if (!isBrowser && process.env.NODE_ENV === 'production') {
-      console.log('Skipping API call during build for /api/schedule/next-round');
-      return null;
-    }
+  // Skip during build/SSR in production
+  if (isServer && process.env.NODE_ENV === 'production') {
+    console.log('Skipping API call during build for /api/schedule/next-round');
+    return null;
+  }
 
+  try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/schedule/next-round`
+      `${process.env.BASE_URL || 'http://localhost:3000'}/api/schedule/next-round`
     );
     const data = await response.json();
 

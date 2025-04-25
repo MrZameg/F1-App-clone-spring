@@ -26,20 +26,18 @@ interface DriverStatistics {
   points: string;
 }
 
-// Helper to determine if we're in a browser environment
-const isBrowser = typeof window !== 'undefined';
+// Helper to check if we're during build/SSR
+const isServer = typeof window === 'undefined';
 
 export async function getDrivers(): Promise<Driver[] | null> {
-  try {
-    // Skip fetch during build/SSR if we're not in the browser
-    if (!isBrowser && process.env.NODE_ENV === 'production') {
-      console.log('Skipping API call during build for /api/drivers');
-      return [];
-    }
+  // Skip during build/SSR in production
+  if (isServer && process.env.NODE_ENV === 'production') {
+    console.log('Skipping API call during build for /api/drivers');
+    return [];
+  }
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/drivers`
-    );
+  try {
+    const response = await fetch(`${process.env.BASE_URL || 'http://localhost:3000'}/api/drivers`);
     const data = await response.json();
 
     if (!data) {
@@ -54,17 +52,15 @@ export async function getDrivers(): Promise<Driver[] | null> {
 }
 
 export async function getDriverStatistics(season: string): Promise<DriverStatistics[] | null> {
-  try {
-    // Skip fetch during build/SSR if we're not in the browser
-    if (!isBrowser && process.env.NODE_ENV === 'production') {
-      console.log(`Skipping API call during build for /api/drivers/statistics?season=${season}`);
-      return [];
-    }
+  // Skip during build/SSR in production
+  if (isServer && process.env.NODE_ENV === 'production') {
+    console.log(`Skipping API call during build for /api/drivers/statistics?season=${season}`);
+    return [];
+  }
 
+  try {
     const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-      }/api/drivers/statistics?season=${season}`
+      `${process.env.BASE_URL || 'http://localhost:3000'}/api/drivers/statistics?season=${season}`
     );
     const data = await response.json();
 
