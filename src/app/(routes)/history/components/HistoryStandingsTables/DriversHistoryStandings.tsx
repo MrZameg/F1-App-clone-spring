@@ -8,9 +8,10 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 
 export function DriversHistoryStandings(props: HistoryStandingsTableProps) {
-  const { season } = props;
+  const { season, searchValue } = props;
   const [drivers, setDrivers] = useState<DriverStatistics[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  let filteredDrivers = drivers;
 
   const getDrivers = useCallback(async () => {
     setIsLoading(true);
@@ -23,9 +24,18 @@ export function DriversHistoryStandings(props: HistoryStandingsTableProps) {
     getDrivers();
   }, [season, getDrivers]);
 
+  if (drivers && searchValue) {
+    filteredDrivers = drivers?.filter(
+      (driver) =>
+        driver.driver?.name.toLowerCase().includes(searchValue?.toLowerCase()) ||
+        driver.driver?.lastName.toLowerCase().includes(searchValue?.toLowerCase()) ||
+        driver.driver?.abbreviated.toLowerCase().includes(searchValue?.toLowerCase())
+    );
+  }
+
   if (isLoading) {
     return <DriversStatisticsTableSkeleton />;
   }
 
-  return <DriversStatisticsTable drivers={drivers} />;
+  return <DriversStatisticsTable drivers={filteredDrivers} />;
 }
