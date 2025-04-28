@@ -9,6 +9,7 @@ import {
 import { getDrivers } from '@/lib/getDrivers';
 import Image from 'next/image';
 import Link from 'next/link';
+import { unstable_ViewTransition as ViewTransition } from 'react';
 
 export async function PositionTable() {
   const drivers = await getDrivers();
@@ -33,13 +34,15 @@ export async function PositionTable() {
                 <TableCell>
                   <div className="flex justify-center items-center">
                     <Link href={`/driver-info/${driver.id}`}>
-                      <Image
-                        alt={`image of ${driver.name}`}
-                        src={driver.imageUrl}
-                        width={70}
-                        height={70}
-                        priority
-                      />
+                      <ViewTransition name={`driver-image-${driver.id}`}>
+                        <Image
+                          alt={`image of ${driver.name}`}
+                          src={driver.imageUrl}
+                          width={70}
+                          height={70}
+                          priority
+                        />
+                      </ViewTransition>
                     </Link>
                   </div>
                 </TableCell>
