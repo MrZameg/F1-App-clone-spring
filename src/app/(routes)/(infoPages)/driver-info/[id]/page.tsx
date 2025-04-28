@@ -2,7 +2,7 @@ import { getDriverInfo } from '@/lib/getDrivers';
 import DriverInfoTable from './components/DriverInfoTable/DriverInfoTable';
 import DriverImageSection from './components/DriverImageSection/DriverImageSection';
 
-export default async function DriverInfoPage({ params }: { params: { id: string } }) {
+export default async function DriverInfoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const driverInfo = await getDriverInfo(id);
 
