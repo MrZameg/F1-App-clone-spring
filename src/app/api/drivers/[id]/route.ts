@@ -6,6 +6,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
   try {
     const driverData = {
+      id,
       name: '',
       driverNumber: '',
       driverImageUrl: '',
