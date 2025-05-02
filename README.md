@@ -1,5 +1,20 @@
 # F1 Clone Project By: Mb 🏎️
 
+## Table of Contents
+
+- [Description](#description)
+- [Technologies](#technologies)
+- [How to Use](#how-to-use)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Project](#running-the-project)
+- [API Endpoints](#api-endpoints)
+- [Pages](#pages)
+- [Web Scraping](#web-scraping)
+- [Authentication](#authentication)
+- [Disclaimer](#disclaimer)
+- [Project Status](#project-status)
+
 ## Description
 
 This project is a Formula 1 website clone, created for educational and practice purposes. The main goal is to improve web development skills and better understand modern frontend technologies.
@@ -10,7 +25,6 @@ This project is a Formula 1 website clone, created for educational and practice 
 - Next.js
 - TypeScript
 - Tailwind CSS
-- API Integration
 - Playwright (Web Scraping)
 - Next.js API Routes
 - Authentication System (Clerk)
@@ -46,7 +60,7 @@ This project is a Formula 1 website clone, created for educational and practice 
    ```
 
 3. Set up environment variables:
-   - Create a `.env.local` file in the root directory
+   - Create a `.env` file in the root directory
    - Add your Clerk authentication keys:
      ```
      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
@@ -73,15 +87,6 @@ This project is a Formula 1 website clone, created for educational and practice 
    http://localhost:3000
    ```
 
-### API Usage
-
-You can access the API endpoints directly:
-
-- Driver statistics: `http://localhost:3000/api/drivers/statistics?season=2025`
-- Team statistics: `http://localhost:3000/api/teams/statistics?season=2025`
-- Schedule: `http://localhost:3000/api/schedule`
-- Next race: `http://localhost:3000/api/schedule/next-round`
-
 ## Web Scraping
 
 The project uses web scraping techniques to obtain updated Formula 1 data. We use the following technologies:
@@ -92,7 +97,7 @@ The project uses web scraping techniques to obtain updated Formula 1 data. We us
 
 The information is obtained ethically and respecting the terms of use and robots.txt of the official Formula 1 website.
 
-## API Endpoints
+# API Endpoints
 
 ### GET /api/schedule
 
@@ -104,6 +109,30 @@ The information is obtained ethically and respecting the terms of use and robots
   - Round number
   - Country flag and circuit images
   - Podium results for completed races (top 3)
+- Example: `http://localhost:3000/api/schedule`
+
+### GET /api/schedule/[id]
+
+- Returns detailed information about a specific race by ID
+- Includes circuit details, schedule, and results if available
+- Example: `http://localhost:3000/api/schedule/australia` (retrieves information for Australia's race )
+
+### GET /api/schedule/results
+
+- Returns race results for a specific Grand Prix
+- Parameters (all required):
+  - `season`: Year of the race (e.g., 2024, 2025) - defaults to current year if not provided
+  - `sessionId`: The session identifier for the race
+  - `circuitId`: The circuit identifier for the race
+- Shows detailed race results including:
+  - Position
+  - Driver number
+  - Driver name
+  - Team/car
+  - Laps completed
+  - Time/retirement status
+  - Points earned
+- Example: `http://localhost:3000/api/schedule/results?season=2025&sessionId=1089&circuitId=bahrain`
 
 ### GET /api/schedule/next-round
 
@@ -112,6 +141,7 @@ The information is obtained ethically and respecting the terms of use and robots
   - Basic Grand Prix information
   - Qualifying and race schedules
   - Circuit and country flag images
+- Example: `http://localhost:3000/api/schedule/next-round`
 
 ### GET /api/drivers
 
@@ -123,18 +153,26 @@ The information is obtained ethically and respecting the terms of use and robots
   - Team
   - Country
   - Driver image
+- Example: `http://localhost:3000/api/drivers`
+
+### GET /api/drivers/[id]
+
+- Returns detailed information about a specific driver by ID
+- Includes career statistics, current team, and biographical information
+- Example: `http://localhost:3000/api/drivers/hamilton` (retrieves information for Lewis Hamilton)
 
 ### GET /api/drivers/statistics
 
-- Returns detailed statistics for all drivers in the specified season (defaults to current year)
+- Returns detailed statistics for all drivers in the specified season
 - Parameters:
-  - `season`: Optional parameter to specify the year (e.g., 2024, 2025)
+  - `season`: Year for the statistics data (e.g., 2024, 2025) - defaults to current year if not provided
 - Information per driver:
   - Position in the championship
   - Driver details (name, last name, abbreviated code, ID)
   - Country
   - Team information (name, ID)
   - Points earned
+- Example: `http://localhost:3000/api/drivers/statistics?season=2025`
 
 ### GET /api/teams
 
@@ -145,17 +183,63 @@ The information is obtained ethically and respecting the terms of use and robots
   - Points
   - Team logo
   - Current car image
+- Example: `http://localhost:3000/api/teams`
+
+### GET /api/teams/[id]
+
+- Returns detailed information about a specific team by ID
+- Includes team history, current drivers, and car specifications
+- Example: `http://localhost:3000/api/teams/mercedes` (retrieves information for Mercedes F1 team)
 
 ### GET /api/teams/statistics
 
-- Returns detailed statistics for all teams in the specified season (defaults to current year)
+- Returns detailed statistics for all teams in the specified season
 - Parameters:
-  - `season`: Optional parameter to specify the year (e.g., 2024, 2025)
+  - `season`: Year for the statistics data (e.g., 2024, 2025) - defaults to current year if not provided
 - Information per team:
   - Position in the championship
   - Team name
   - Points earned
   - Team ID
+- Example: `http://localhost:3000/api/teams/statistics?season=2025`
+
+# Pages
+
+### Home Page (/)
+
+- Landing page with featured content
+- Displays next race countdown, latest news, and highlights
+- Quick access to drivers' and teams' standings
+
+### Schedule Page (/schedule)
+
+- Displays the complete F1 2025 season calendar
+- Shows all race dates, circuits, and countries
+- Race results available for completed races
+
+### Statistics Page (/statistics)
+
+- Comprehensive view of current season statistics
+- Driver and constructor standings
+- Performance metrics and comparison tools
+
+### History Page (/history)
+
+- Archive of Formula 1 historical data
+- Past champions, legendary drivers, and iconic moments
+- Timeline of Formula 1 evolution
+
+### Driver Info Page (/driver-info/[id])
+
+- Detailed profile for individual drivers
+- Career statistics, biography, and current season performance
+- Media gallery and latest news
+
+### Team Info Page (/team-info/[id])
+
+- Comprehensive team profiles
+- Technical specifications of current car
+- Team history, achievements, and current driver lineup
 
 ## Authentication
 
