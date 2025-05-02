@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/table';
 import { getTeams } from '@/lib/getTeams';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export async function TeamTable() {
   const teams = await getTeams();
@@ -29,30 +30,40 @@ export async function TeamTable() {
               <TableRow key={team.id}>
                 <TableCell className="px-4">
                   <div className="flex justify-center items-center">
-                    <Image
-                      alt={`Logo of ${team.name}`}
-                      src={team.logoUrl}
-                      width={32}
-                      height={32}
-                      priority
-                    />
+                    <Link href={`/team-info/${team.id}`}>
+                      <Image
+                        alt={`Logo of ${team.name}`}
+                        src={team.logoUrl}
+                        width={32}
+                        height={32}
+                        priority
+                      />
+                    </Link>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="flex items-center justify-center font-bold">
-                    {team.position}
-                  </span>
+                  <Link href={`/team-info/${team.id}`}>
+                    <span className="flex items-center justify-center font-bold">
+                      {team.position}
+                    </span>
+                  </Link>
                 </TableCell>
-                <TableCell className="px-4">{team.name}</TableCell>
-                <TableCell className="text-right font-bold px-4">{team.points} pts</TableCell>
                 <TableCell className="px-4">
-                  <Image
-                    alt={`${team.name}'s car`}
-                    src={team.carUrl}
-                    width={70}
-                    height={40}
-                    priority
-                  />
+                  <Link href={`/team-info/${team.id}`}>{team.name}</Link>
+                </TableCell>
+                <TableCell className="text-right font-bold px-4">
+                  <Link href={`/team-info/${team.id}`}>{team.points} pts</Link>
+                </TableCell>
+                <TableCell className="px-4">
+                  <Link href={`/team-info/${team.id}`}>
+                    <Image
+                      alt={`${team.name}'s car`}
+                      src={team.carUrl}
+                      width={70}
+                      height={40}
+                      priority
+                    />
+                  </Link>
                 </TableCell>
               </TableRow>
             ))

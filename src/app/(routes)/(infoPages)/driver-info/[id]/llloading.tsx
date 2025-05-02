@@ -1,4 +1,4 @@
-import { DriverImageSectionSkeleton, DriverInfoTableSkeleton } from './components';
+import { DriverImageSectionSkeleton, DriverInfoTableSkeleton } from '../components';
 
 export default function Loading() {
   return (
