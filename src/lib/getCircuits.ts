@@ -28,6 +28,16 @@ export interface Circuit {
   };
 }
 
+export interface CircuitPosition {
+  position: string;
+  number: string;
+  driver: string;
+  car: string;
+  laps: string;
+  timeRetired: string;
+  points: string;
+}
+
 // Helper to check if we're during build/SSR
 const isServer = typeof window === 'undefined';
 
@@ -68,6 +78,30 @@ export async function getNextRound(): Promise<Circuit | null> {
 
     if (!response.ok) {
       throw new Error('Failed to fetch next round');
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function getCircuitResults(
+  circuitId: string,
+  sessionId: string,
+  season: string = '2025'
+): Promise<CircuitPosition[] | null> {
+  try {
+    const response = await fetch(
+      `${
+        process.env.BASE_URL || 'http://localhost:3000'
+      }/api/schedule/results?circuitId=${circuitId}&sessionId=${sessionId}&season=${season}`
+    );
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch circuit results');
     }
 
     return data;

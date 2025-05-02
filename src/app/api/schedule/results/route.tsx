@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const year = searchParams.get('year') || new Date().getFullYear().toString();
+  const season = searchParams.get('season') || new Date().getFullYear().toString();
   const sessionId = searchParams.get('sessionId') || null;
   const circuitId = searchParams.get('circuitId') || null;
 
@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   try {
     if (sessionId && circuitId) {
       await page.goto(
-        `https://www.formula1.com/en/results/${year}/races/${sessionId}/${circuitId}/race-result`
+        `https://www.formula1.com/en/results/${season}/races/${sessionId}/${circuitId}/race-result`
       );
 
       await page.waitForSelector('table');
@@ -25,13 +25,13 @@ export async function GET(request: Request) {
           const cells = row.querySelectorAll('td');
 
           return {
-            POS: cells[0]?.textContent?.trim() || '',
-            NO: cells[1]?.textContent?.trim() || '',
-            DRIVER: cells[2]?.textContent?.trim() || '',
-            CAR: cells[3]?.textContent?.trim() || '',
-            LAPS: cells[4]?.textContent?.trim() || '',
-            TIME_RETIRED: cells[5]?.textContent?.trim() || '',
-            PTS: cells[6]?.textContent?.trim() || '',
+            position: cells[0]?.textContent?.trim() || '',
+            number: cells[1]?.textContent?.trim() || '',
+            driver: cells[2]?.textContent?.trim() || '',
+            car: cells[3]?.textContent?.trim() || '',
+            laps: cells[4]?.textContent?.trim() || '',
+            timeRetired: cells[5]?.textContent?.trim() || '',
+            points: cells[6]?.textContent?.trim() || '',
           };
         });
       });

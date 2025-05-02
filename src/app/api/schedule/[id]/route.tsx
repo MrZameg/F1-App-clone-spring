@@ -1,3 +1,4 @@
+import { getCircuitResults } from '@/lib/getCircuits';
 import { NextResponse } from 'next/server';
 import { chromium } from 'playwright';
 
@@ -51,15 +52,35 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     )
     .textContent();
 
-  const resultsLink = ''; // GET RESULT LINK AND GET RESULTS
+  const resultsLink = await page
+    .locator('.grid.gap-x-normal.gap-y-micro.f1-grid.grid-cols-1.tablet\\:grid-cols-2')
+    .evaluate((element) => {
+      const links = element.querySelectorAll('a');
+
+      const link = Array.from(links).find((link) => link.textContent?.includes('Results'));
+
+      const hrefArray = link?.getAttribute('href')?.split('/');
+      const circuitId = hrefArray?.[hrefArray.length - 2];
+      const sessionId = hrefArray?.[hrefArray.length - 3];
+
+      return { circuitId, sessionId };
+    });
+
+  let results = null;
+
+  if (resultsLink?.circuitId && resultsLink?.sessionId) {
+    results = await getCircuitResults(resultsLink.circuitId, resultsLink.sessionId);
+  }
 
   await browser.close();
 
   return NextResponse.json({
+    id,
     circuitName,
     fllagUrl,
     circuitImageUrl,
     circuitInfo,
     description,
+    results,
   });
 }
