@@ -36,7 +36,13 @@ export async function GET(request: Request) {
         });
       });
 
-      return NextResponse.json(raceResults);
+      const date = await page
+        .locator(
+          'p.f1-text.font-titillium.tracking-normal.font-bold.non-italic.normal-case.leading-snug.f1-text__micro.text-fs-15px'
+        )
+        .textContent();
+
+      return NextResponse.json({ raceResults, date });
     } else {
       return NextResponse.json({ error: 'No sessionId or circuitId provided' }, { status: 400 });
     }

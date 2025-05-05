@@ -37,9 +37,9 @@ export function RaceCardFooter({ isFeaturedCard, round, userId }: RaceCardFooter
           </Link>
         </>
       ) : (
-        <Link href="/schedule" className="cursor-pointer text-lg hover:underline">
+        <span className="cursor-pointer text-lg hover:underline">
           {round.finished ? 'See full results' : 'More info'}
-        </Link>
+        </span>
       )}
     </CardFooter>
   );

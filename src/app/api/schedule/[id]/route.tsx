@@ -66,10 +66,13 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       return { circuitId, sessionId };
     });
 
-  let results = null;
+  let raceResults = null;
+  let date = null;
 
   if (resultsLink?.circuitId && resultsLink?.sessionId) {
-    results = await getCircuitResults(resultsLink.circuitId, resultsLink.sessionId);
+    const results = await getCircuitResults(resultsLink.circuitId, resultsLink.sessionId);
+    raceResults = results?.raceResults;
+    date = results?.date;
   }
 
   await browser.close();
@@ -81,6 +84,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     circuitImageUrl,
     circuitInfo,
     description,
-    results,
+    results: raceResults,
+    date,
   });
 }

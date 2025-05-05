@@ -38,6 +38,31 @@ export interface CircuitPosition {
   points: string;
 }
 
+export interface CircuitInfo {
+  id: string;
+  circuitName: string;
+  fllagUrl: string;
+  circuitImageUrl: string;
+  circuitInfo: {
+    firstGrandPrix: string;
+    numberOfLaps: string;
+    circuitLength: string;
+    raceDistance: string;
+    lapRecord: {
+      time: string;
+      diver: string;
+    };
+  };
+  description: string;
+  results: CircuitPosition[];
+  date: string;
+}
+
+export interface CircuitResults {
+  raceResults: CircuitPosition[];
+  date: string;
+}
+
 // Helper to check if we're during build/SSR
 const isServer = typeof window === 'undefined';
 
@@ -91,7 +116,7 @@ export async function getCircuitResults(
   circuitId: string,
   sessionId: string,
   season: string = '2025'
-): Promise<CircuitPosition[] | null> {
+): Promise<CircuitResults | null> {
   try {
     const response = await fetch(
       `${
@@ -102,6 +127,24 @@ export async function getCircuitResults(
 
     if (!response.ok) {
       throw new Error('Failed to fetch circuit results');
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function getCircuitInfo(circuitId: string): Promise<CircuitInfo | null> {
+  try {
+    const response = await fetch(
+      `${process.env.BASE_URL || 'http://localhost:3000'}/api/schedule/${circuitId}`
+    );
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch circuit info');
     }
 
     return data;

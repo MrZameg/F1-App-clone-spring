@@ -1,5 +1,6 @@
 import { RaceCard } from '@/components/shared/RaceCard';
 import { getCircuits } from '@/lib/getCircuits';
+import Link from 'next/link';
 
 export default async function SchedulePage() {
   const circuits = await getCircuits();
@@ -10,7 +11,11 @@ export default async function SchedulePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {circuits &&
           circuits.length > 0 &&
-          circuits.map((circuit) => <RaceCard key={circuit.id} round={circuit} />)}
+          circuits.map((circuit) => (
+            <Link href={`/schedule/${circuit.id}`} key={circuit.id}>
+              <RaceCard key={circuit.id} round={circuit} />
+            </Link>
+          ))}
       </div>
     </div>
   );
