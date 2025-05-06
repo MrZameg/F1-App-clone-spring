@@ -1,4 +1,4 @@
-import { getDriverStatistics } from '@/lib/getDrivers';
+import { getDriversStatistics } from '@/lib/getDrivers';
 import { HistoryStandingsTableProps } from './HistoryTables.types';
 import {
   DriversStatisticsTable,
@@ -15,7 +15,7 @@ export function DriversHistoryStandings(props: HistoryStandingsTableProps) {
 
   const getDrivers = useCallback(async () => {
     setIsLoading(true);
-    const driversData = await getDriverStatistics(season);
+    const driversData = await getDriversStatistics(season);
     setDrivers(driversData);
     setIsLoading(false);
   }, [season]);
