@@ -1,5 +1,5 @@
 import { HistoryStandingsTableProps } from './HistoryTables.types';
-import { getTeamStatistics } from '@/lib/getTeams';
+import { getTeamsStatistics } from '@/lib/getTeams';
 import { useCallback, useEffect, useState } from 'react';
 import {
   TeamsStatisticsTable,
@@ -14,7 +14,7 @@ export function TeamsHistoryStandings(props: HistoryStandingsTableProps) {
 
   const getTeams = useCallback(async () => {
     setIsLoading(true);
-    const teams = await getTeamStatistics(season);
+    const teams = await getTeamsStatistics(season);
     setTeams(teams);
     setIsLoading(false);
   }, [season]);

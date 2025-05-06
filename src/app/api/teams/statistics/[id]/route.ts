@@ -4,23 +4,20 @@ import { chromium } from 'playwright';
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id }: { id: string } = await params;
   const { searchParams } = new URL(request.url);
-  const seasonDriverId: string | null = searchParams.get('id');
   const season: string | null = searchParams.get('season') || new Date().getFullYear().toString();
-  if (!seasonDriverId) {
-    return NextResponse.json({ error: 'No seasonDriverId provided' }, { status: 400 });
+  if (!season) {
+    return NextResponse.json({ error: 'No season provided' }, { status: 400 });
   }
 
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
   try {
-    await page.goto(
-      `https://www.formula1.com/en/results/${season}/drivers/${seasonDriverId}/${id}`
-    );
+    await page.goto(`https://www.formula1.com/en/results/${season}/team/${id}`);
 
     await page.waitForSelector('table');
 
-    const driverResults = await page
+    const teamResults = await page
       .locator('table tbody tr')
       .evaluateAll((rows: Element[], currentSeason: string) => {
         return rows.map((row: Element) => {
@@ -35,9 +32,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
           const gpSeason = currentSeason;
 
           const date = row.querySelector('td:nth-child(2)')?.textContent?.trim() || '';
-          const car = row.querySelector('td:nth-child(3)')?.textContent?.trim() || '';
-          const positionText = row.querySelector('td:nth-child(4)')?.textContent?.trim() || '0';
-          const pointsText = row.querySelector('td:nth-child(5)')?.textContent?.trim() || '0';
+          const pointsText = row.querySelector('td:nth-child(3)')?.textContent?.trim() || '0';
 
           return {
             grandPrix: {
@@ -47,17 +42,15 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
               id: gpId,
             },
             date: date,
-            car: car,
-            racePosition: parseInt(positionText, 10),
             points: parseInt(pointsText, 10),
           };
         });
       }, season);
 
     await browser.close();
-    return NextResponse.json({ driverId: id, season, driverResults });
+    return NextResponse.json({ teamId: id, season, teamResults });
   } catch (error) {
-    console.error('Error scraping driver statistics:', error);
+    console.error('Error scraping team statistics:', error);
     await browser.close();
     return NextResponse.json(
       { error: 'An error occurred while scraping the data' },

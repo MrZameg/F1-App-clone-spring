@@ -40,6 +40,23 @@ export interface TeamInfo {
   description: string;
 }
 
+export interface TeamsStatistics {
+  teamId: string;
+  season: string;
+  teamResults: TeamStatisticResult[];
+}
+
+interface TeamStatisticResult {
+  grandPrix: {
+    name: string;
+    season: string;
+    sessionId: string;
+    id: string;
+  };
+  date: string;
+  points: number;
+}
+
 // Helper to check if we're during build/SSR
 const isServer = typeof window === 'undefined';
 
@@ -65,7 +82,7 @@ export async function getTeams(): Promise<Team[] | null> {
   }
 }
 
-export async function getTeamStatistics(season: string): Promise<TeamStatistics[] | null> {
+export async function getTeamsStatistics(season: string): Promise<TeamStatistics[] | null> {
   // Skip during build/SSR in production
   if (isServer && process.env.NODE_ENV === 'production') {
     console.log(`Skipping API call during build for /api/teams/statistics?season=${season}`);
@@ -99,6 +116,35 @@ export async function getTeamInfo(id: string): Promise<TeamInfo | null> {
   try {
     const response = await fetch(
       `${process.env.BASE_URL || 'http://localhost:3000'}/api/teams/${id}`
+    );
+    const data = await response.json();
+
+    if (!data) {
+      return null;
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function getTeamStatistics(
+  id: string,
+  season: string = new Date().getFullYear().toString()
+): Promise<TeamsStatistics | null> {
+  // Skip during build/SSR in production
+  if (isServer && process.env.NODE_ENV === 'production') {
+    console.log(`Skipping API call during build for /api/teams/statistics/${id}?season=${season}`);
+    return null;
+  }
+
+  try {
+    const response = await fetch(
+      `${
+        process.env.BASE_URL || 'http://localhost:3000'
+      }/api/teams/statistics/${id}?season=${season}`
     );
     const data = await response.json();
 

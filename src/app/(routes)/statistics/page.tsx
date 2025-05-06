@@ -2,11 +2,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DriversStatisticsTable } from '../../../components/shared/DriversStatisticsTable';
 import { TeamsStatisticsTable } from '../../../components/shared/TeamsStatisticsTable';
 import { getDriverStatistics } from '@/lib/getDrivers';
-import { getTeamStatistics } from '@/lib/getTeams';
+import { getTeamsStatistics } from '@/lib/getTeams';
 
 export default async function StatisticsPage() {
   const drivers = await getDriverStatistics(new Date().getFullYear().toString());
-  const teams = await getTeamStatistics(new Date().getFullYear().toString());
+  const teams = await getTeamsStatistics(new Date().getFullYear().toString());
 
   return (
     <div className="w-full flex justify-center items-center">
