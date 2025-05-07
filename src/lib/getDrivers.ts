@@ -46,6 +46,7 @@ export interface DriverInfo {
 }
 
 export interface DriverStatistics {
+  driverName: string;
   driverId: string;
   season: string;
   driverResults: DriverStatisticResult[];

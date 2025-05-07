@@ -20,6 +20,12 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
 
     await page.waitForSelector('table');
 
+    const name = await page
+      .locator(
+        'h1.f1-heading.tracking-normal.text-fs-24px.leading-tight.normal-case.font-normal.non-italic.f1-heading__body.font-formulaOne'
+      )
+      ?.textContent();
+    const driverName = name?.split(':')[1].trim();
     const driverResults = await page
       .locator('table tbody tr')
       .evaluateAll((rows: Element[], currentSeason: string) => {
@@ -55,7 +61,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       }, season);
 
     await browser.close();
-    return NextResponse.json({ driverId: id, season, driverResults });
+    return NextResponse.json({ driverName, driverId: id, season, driverResults });
   } catch (error) {
     console.error('Error scraping driver statistics:', error);
     await browser.close();

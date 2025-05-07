@@ -25,27 +25,39 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     };
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
-    await page.goto(`https://www.formula1.com/en/drivers/${id}`);
 
-    const name = (await page.locator('h1.f1-heading').textContent()) || '';
+    // Go to the driver's page and get the response
+    const response = await page.goto(`https://www.formula1.com/en/drivers/${id}`);
+
+    // Check if page is 404
+    if (
+      !response ||
+      response.status() === 404 ||
+      (await page.locator('title:has-text("404")').count()) > 0
+    ) {
+      await browser.close();
+      return NextResponse.json({ error: 'Driver not found' }, { status: 404 });
+    }
+
+    const name = (await page.locator('h1.f1-heading')?.textContent()) || '';
     const driverNumber =
       (await page
         .locator(
           'p.f1-heading.tracking-normal.text-fs-24px.leading-tight.normal-case.font-normal.non-italic.f1-heading__body.font-formulaOne.f1-utils-inline-image--loose.text-greyDark'
         )
-        .textContent()) || '';
+        ?.textContent()) || '';
     const countryFlagUrl =
       (await page
         .locator(
           'p.f1-heading.tracking-normal.text-fs-24px.leading-tight.normal-case.font-normal.non-italic.f1-heading__body.font-formulaOne.f1-utils-inline-image--loose.text-greyDark img'
         )
-        .getAttribute('src')) || '';
+        ?.getAttribute('src')) || '';
 
     const biography = await page.locator('.f1-atomic-wysiwyg').textContent();
     const driverImageUrl = await page
       .locator('img.f1-c-image.aspect-square.w-full.overflow-hidden.object-cover.object-top')
-      .getAttribute('src');
-    const driverInfo = await page.locator('.f1-dl').evaluate((el) => {
+      ?.getAttribute('src');
+    const driverInfo = await page.locator('.f1-dl')?.evaluate((el) => {
       const rows = Array.from(el.querySelectorAll('dd'));
 
       const team = rows[0].textContent;

@@ -27,27 +27,33 @@ export default async function page({
   return (
     <div className="flex flex-col justify-center pt-12">
       <div className="flex items-center gap-5">
-        <Image
-          src={driver?.driverImageUrl || ''}
-          alt={driver?.name || ''}
-          width={200}
-          height={200}
-        />
+        {driver?.driverImageUrl && (
+          <Image
+            src={driver?.driverImageUrl || ''}
+            alt={driver?.name || ''}
+            width={200}
+            height={200}
+          />
+        )}
         <h1 className="flex items-center gap-2 text-2xl font-bold">
-          Results for {driver?.name} in {season}
-          <span>
-            <Image
-              src={driver?.countryFlagUrl || ''}
-              alt={driver?.name || ''}
-              width={70}
-              height={70}
-              className="rounded-lg"
-            />
-          </span>
+          Results for {driver?.name || driverResults?.driverName} in {season}
+          {driver?.countryFlagUrl && (
+            <span>
+              <Image
+                src={driver?.countryFlagUrl || ''}
+                alt={driver?.name || ''}
+                width={70}
+                height={70}
+                className="rounded-lg"
+              />
+            </span>
+          )}
         </h1>
       </div>
       <Table className="mt-12">
-        <TableCaption>{driver?.name} in 2025</TableCaption>
+        <TableCaption>
+          {driver?.name || driverResults?.driverName} in {season}
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Grand Prix</TableHead>
@@ -65,7 +71,7 @@ export default async function page({
                   <Link href={`/schedule/${result.grandPrix.id}`}>{result.grandPrix.name}</Link>
                 ) : (
                   <Link
-                    href={`/statistics/teams/${result.grandPrix.id}?sessionId=${result.grandPrix.id}?sessionId=${result.grandPrix.sessionId}&season=${driverResults.season}`}
+                    href={`/statistics/teams/${result.grandPrix.id}?sessionId=${result.grandPrix.sessionId}&season=${driverResults.season}`}
                   >
                     {result.grandPrix.name}
                   </Link>
