@@ -35,7 +35,7 @@ export function DriversStatisticsTable(props: DriverStatisticsTableProps) {
               <TableCell className="text-lg py-3">
                 <Link
                   className="underline-offset-4 hover:underline"
-                  href={`/drivers/statistics/${driver.driver?.id}?id=${driver.driver?.statisticsHandle}`}
+                  href={`/statistics/drivers/${driver.driver?.id}?id=${driver.driver?.statisticsHandle}&season=${season}`}
                 >
                   {driver.driver?.name} {driver.driver?.lastName}
                 </Link>

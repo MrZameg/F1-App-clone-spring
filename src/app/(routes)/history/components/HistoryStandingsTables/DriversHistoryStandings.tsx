@@ -37,5 +37,5 @@ export function DriversHistoryStandings(props: HistoryStandingsTableProps) {
     return <DriversStatisticsTableSkeleton />;
   }
 
-  return <DriversStatisticsTable drivers={filteredDrivers} />;
+  return <DriversStatisticsTable drivers={filteredDrivers} season={season} />;
 }

@@ -28,7 +28,7 @@ export default function ScheduleResultsTable({ circuitInfo }: ScheduleResultsTab
             <TableRow key={`${i}-${result.position}`}>
               <TableCell>{result.position}</TableCell>
               <TableCell>{result.number}</TableCell>
-              <TableCell>{result.driver}</TableCell>
+              <TableCell>{result.driver.slice(0, -3)}</TableCell>
               <TableCell>{result.laps}</TableCell>
               <TableCell>{result.timeRetired}</TableCell>
             </TableRow>

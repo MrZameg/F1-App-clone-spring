@@ -26,7 +26,7 @@ export default async function StatisticsPage() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="drivers">
-          <DriversStatisticsTable drivers={drivers} />
+          <DriversStatisticsTable drivers={drivers} season={new Date().getFullYear().toString()} />
         </TabsContent>
         <TabsContent value="teams">
           <TeamsStatisticsTable teams={teams} />
