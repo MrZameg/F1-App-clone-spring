@@ -41,6 +41,7 @@ export interface TeamInfo {
 }
 
 export interface TeamsStatistics {
+  teamName: string;
   teamId: string;
   season: string;
   teamResults: TeamStatisticResult[];

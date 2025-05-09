@@ -44,7 +44,7 @@ export function DriversStatisticsTable(props: DriverStatisticsTableProps) {
               <TableCell>
                 <Link
                   className="underline-offset-4 hover:underline"
-                  href={`/teams-statistics/${driver.team?.id}`}
+                  href={`/statistics/teams/${driver.team?.id}?season=${season}`}
                 >
                   {driver.team?.name}
                 </Link>

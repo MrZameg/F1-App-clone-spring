@@ -29,7 +29,7 @@ export default async function StatisticsPage() {
           <DriversStatisticsTable drivers={drivers} season={new Date().getFullYear().toString()} />
         </TabsContent>
         <TabsContent value="teams">
-          <TeamsStatisticsTable teams={teams} />
+          <TeamsStatisticsTable teams={teams} season={new Date().getFullYear().toString()} />
         </TabsContent>
       </Tabs>
     </div>

@@ -10,7 +10,7 @@ const isPrivateRoute = createRouteMatcher([
 export default clerkMiddleware(async (auth, req) => {
   if (isPrivateRoute(req)) {
     // For statistics routes, check if season parameter is less than current year
-    if (req.url.includes('/statistics/drivers/')) {
+    if (req.url.includes('/statistics/drivers/') || req.url.includes('/statistics/teams/')) {
       const url = new URL(req.url);
       const season = url.searchParams.get('season');
       const currentYear = new Date().getFullYear();

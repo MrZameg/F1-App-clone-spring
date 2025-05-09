@@ -33,7 +33,7 @@ export function TeamsStatisticsTable(props: TeamsStatisticsTableProps) {
               <TableCell className="text-lg py-3">
                 <Link
                   className="underline-offset-4 hover:underline"
-                  href={`/teams/statistics/${team.id}`}
+                  href={`/statistics/teams/${team.id}?season=${season}`}
                 >
                   {team.team}
                 </Link>
