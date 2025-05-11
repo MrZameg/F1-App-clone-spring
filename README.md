@@ -10,6 +10,8 @@
   - [Running the Project](#running-the-project)
 - [API Endpoints](#api-endpoints)
 - [Pages](#pages)
+- [Server Actions](#server-actions)
+- [View Transitions](#view-transitions)
 - [Web Scraping](#web-scraping)
 - [Authentication](#authentication)
 - [Disclaimer](#disclaimer)
@@ -99,7 +101,9 @@ The information is obtained ethically and respecting the terms of use and robots
 
 # API Endpoints
 
-### GET /api/schedule
+### Schedule API Endpoints
+
+#### GET /api/schedule
 
 - Returns the complete F1 2025 season calendar
 - Includes detailed information for each race:
@@ -111,13 +115,13 @@ The information is obtained ethically and respecting the terms of use and robots
   - Podium results for completed races (top 3)
 - Example: `http://localhost:3000/api/schedule`
 
-### GET /api/schedule/[id]
+#### GET /api/schedule/[id]
 
 - Returns detailed information about a specific race by ID
 - Includes circuit details, schedule, and results if available
-- Example: `http://localhost:3000/api/schedule/australia` (retrieves information for Australia's race )
+- Example: `http://localhost:3000/api/schedule/australia` (retrieves information for Australia's race)
 
-### GET /api/schedule/results
+#### GET /api/schedule/results
 
 - Returns race results for a specific Grand Prix
 - Parameters (all required):
@@ -134,7 +138,7 @@ The information is obtained ethically and respecting the terms of use and robots
   - Points earned
 - Example: `http://localhost:3000/api/schedule/results?season=2025&sessionId=1089&circuitId=bahrain`
 
-### GET /api/schedule/next-round
+#### GET /api/schedule/next-round
 
 - Returns detailed information about the next race
 - Includes:
@@ -143,7 +147,9 @@ The information is obtained ethically and respecting the terms of use and robots
   - Circuit and country flag images
 - Example: `http://localhost:3000/api/schedule/next-round`
 
-### GET /api/drivers
+### Drivers API Endpoints
+
+#### GET /api/drivers
 
 - Returns the complete list of drivers for the current season
 - Information per driver:
@@ -155,13 +161,13 @@ The information is obtained ethically and respecting the terms of use and robots
   - Driver image
 - Example: `http://localhost:3000/api/drivers`
 
-### GET /api/drivers/[id]
+#### GET /api/drivers/[id]
 
 - Returns detailed information about a specific driver by ID
 - Includes career statistics, current team, and biographical information
 - Example: `http://localhost:3000/api/drivers/hamilton` (retrieves information for Lewis Hamilton)
 
-### GET /api/drivers/statistics
+#### GET /api/drivers/statistics
 
 - Returns detailed statistics for all drivers in the specified season
 - Parameters:
@@ -174,7 +180,9 @@ The information is obtained ethically and respecting the terms of use and robots
   - Points earned
 - Example: `http://localhost:3000/api/drivers/statistics?season=2025`
 
-### GET /api/teams
+### Teams API Endpoints
+
+#### GET /api/teams
 
 - Returns the complete list of F1 teams
 - Information per team:
@@ -185,13 +193,13 @@ The information is obtained ethically and respecting the terms of use and robots
   - Current car image
 - Example: `http://localhost:3000/api/teams`
 
-### GET /api/teams/[id]
+#### GET /api/teams/[id]
 
 - Returns detailed information about a specific team by ID
 - Includes team history, current drivers, and car specifications
 - Example: `http://localhost:3000/api/teams/mercedes` (retrieves information for Mercedes F1 team)
 
-### GET /api/teams/statistics
+#### GET /api/teams/statistics
 
 - Returns detailed statistics for all teams in the specified season
 - Parameters:
@@ -210,18 +218,47 @@ The information is obtained ethically and respecting the terms of use and robots
 - Landing page with featured content
 - Displays next race countdown, latest news, and highlights
 - Quick access to drivers' and teams' standings
+- Components:
+  - Race countdown timer
+  - Position tables for drivers and teams
+  - Featured content carousel
 
-### Schedule Page (/schedule)
+### Schedule Pages
+
+#### Schedule Main Page (/schedule)
 
 - Displays the complete F1 2025 season calendar
 - Shows all race dates, circuits, and countries
 - Race results available for completed races
+- Components:
+  - Schedule calendar
+  - Circuit cards
 
-### Statistics Page (/statistics)
+#### Race Details Page (/schedule/[id])
+
+- Detailed information about a specific race
+- Shows circuit layout, race times, and results (if available)
+- Includes historical data and track information
+
+### Statistics Pages
+
+#### Statistics Main Page (/statistics)
 
 - Comprehensive view of current season statistics
 - Driver and constructor standings
 - Performance metrics and comparison tools
+
+#### Drivers Statistics Page (/statistics/drivers)
+
+- Detailed driver standings and performance metrics
+- Comparison tools for driver performance
+- Points progression throughout the season
+
+#### Teams Statistics Page (/statistics/teams)
+
+- Constructor championship standings
+- Team performance metrics
+- Points progression throughout the season
 
 ### History Page (/history)
 
@@ -229,17 +266,74 @@ The information is obtained ethically and respecting the terms of use and robots
 - Past champions, legendary drivers, and iconic moments
 - Timeline of Formula 1 evolution
 
-### Driver Info Page (/driver-info/[id])
+### Info Pages
+
+#### Driver Info Page (/driver-info/[id])
 
 - Detailed profile for individual drivers
 - Career statistics, biography, and current season performance
 - Media gallery and latest news
+- Components:
+  - Driver profile header
+  - Statistics dashboard
+  - Career timeline
+  - Media gallery
 
-### Team Info Page (/team-info/[id])
+#### Team Info Page (/team-info/[id])
 
 - Comprehensive team profiles
 - Technical specifications of current car
 - Team history, achievements, and current driver lineup
+- Components:
+  - Team profile header
+  - Car specifications
+  - Driver cards
+  - Team history timeline
+
+## Server Actions
+
+The project utilizes Next.js server actions for various functionalities:
+
+### Favorites Management
+
+**`addOrRemoveFromFavorites`**
+
+- **Purpose**: Adds or removes drivers and teams from a user's favorites
+- **Parameters**: FormData containing teamId and/or driverId
+- **Returns**: Updated user metadata or error message
+- **Authentication**: Requires logged-in user
+- **Usage Example**:
+  ```typescript
+  // HTML Form
+  <form action={addOrRemoveFromFavorites}>
+    <input type="hidden" name="teamId" value="mercedes" />
+    <button type="submit">Add/Remove from Favorites</button>
+  </form>
+  ```
+
+## View Transitions
+
+The project implements Next.js experimental View Transitions API for smooth, animated page transitions:
+
+### Driver Image Transitions
+
+- **Components**:
+  - `PositionTable.tsx`: Creates a smooth transition when navigating from home to driver-info pages
+  - `DriverImageSection.tsx`: Maintains image continuity when viewing driver profiles
+  - `TeamDriversSection.tsx`: Animates transitions between team and driver pages
+
+### Implementation
+
+The project uses the unstable_ViewTransition component from React to wrap elements that should transition between pages:
+
+```tsx
+import { unstable_ViewTransition as ViewTransition } from 'react';
+
+// Example usage
+<ViewTransition name={`driver-image-${driver.id}`}>
+  <Image src={driver.image} alt={driver.name} width={200} height={200} />
+</ViewTransition>;
+```
 
 ## Authentication
 
