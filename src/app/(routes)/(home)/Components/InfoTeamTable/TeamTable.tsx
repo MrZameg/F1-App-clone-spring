@@ -1,3 +1,4 @@
+import { AddRemoveFavorites } from '@/components/shared/AddRemoveFavorites';
 import {
   Table,
   TableBody,
@@ -19,6 +20,7 @@ export async function TeamTable() {
         <TableHeader>
           <TableRow>
             <TableHead className="px-4"> </TableHead>
+            <TableHead className="px-4"> </TableHead>
             <TableHead className="font-bold px-4">Position</TableHead>
             <TableHead className="font-bold px-4">Team</TableHead>
             <TableHead className="text-right font-bold px-4">Points</TableHead>
@@ -28,6 +30,9 @@ export async function TeamTable() {
           {teams ? (
             teams.map((team) => (
               <TableRow key={team.id}>
+                <TableCell className="px-4">
+                  <AddRemoveFavorites className="border-none" type="team" id={team.id} />
+                </TableCell>
                 <TableCell className="px-4">
                   <div className="flex justify-center items-center">
                     <Link href={`/team-info/${team.id}`}>

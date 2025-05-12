@@ -1,3 +1,4 @@
+import { AddRemoveFavorites } from '@/components/shared/AddRemoveFavorites';
 import {
   Table,
   TableBody,
@@ -20,6 +21,7 @@ export async function PositionTable() {
         <TableHeader>
           <TableRow>
             <TableHead> </TableHead>
+            <TableHead> </TableHead>
             <TableHead className="font-bold px-4">Position</TableHead>
             <TableHead className="font-bold px-4">Name</TableHead>
             <TableHead className="font-bold px-4">Team</TableHead>
@@ -31,6 +33,9 @@ export async function PositionTable() {
           {drivers ? (
             drivers.map((driver) => (
               <TableRow key={driver.id}>
+                <TableCell>
+                  <AddRemoveFavorites className="border-none" type="driver" id={driver.id} />
+                </TableCell>
                 <TableCell>
                   <div className="flex justify-center items-center">
                     <Link href={`/driver-info/${driver.id}`}>

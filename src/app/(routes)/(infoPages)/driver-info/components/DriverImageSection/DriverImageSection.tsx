@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { DriverImageSectionProps } from './DriverImageSection.types';
 import { unstable_ViewTransition as ViewTransition } from 'react';
+import { AddRemoveFavorites } from '@/components/shared/AddRemoveFavorites';
 
 export default function DriverImageSection({ driverInfo }: DriverImageSectionProps) {
   return (
@@ -23,6 +24,7 @@ export default function DriverImageSection({ driverInfo }: DriverImageSectionPro
           height={30}
           className="rounded-md"
         />
+        <AddRemoveFavorites type="driver" id={driverInfo.id} />
       </div>
       <article>
         <h4 className="text-xl font-bold mb-2">Biography</h4>
