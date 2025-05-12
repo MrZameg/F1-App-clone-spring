@@ -16,6 +16,7 @@
 - [Authentication](#authentication)
 - [Disclaimer](#disclaimer)
 - [Project Status](#project-status)
+- [Screenshots](#screenshots)
 
 ## Description
 
@@ -299,16 +300,30 @@ The project utilizes Next.js server actions for various functionalities:
 **`addOrRemoveFromFavorites`**
 
 - **Purpose**: Adds or removes drivers and teams from a user's favorites
-- **Parameters**: FormData containing teamId and/or driverId
+- **Parameters**:
+  - `type`: String indicating the type ('driver' or 'team')
+  - `id`: String ID of the driver or team to add/remove
 - **Returns**: Updated user metadata or error message
 - **Authentication**: Requires logged-in user
 - **Usage Example**:
+
   ```typescript
-  // HTML Form
-  <form action={addOrRemoveFromFavorites}>
-    <input type="hidden" name="teamId" value="mercedes" />
-    <button type="submit">Add/Remove from Favorites</button>
-  </form>
+  // Direct function call example
+  const result = await addOrRemoveFromFavorites('team', 'mercedes');
+
+  // Real implementation example from AddRemoveFavorites component
+  <TableCell>
+    <AddRemoveFavorites className="border-none" type="driver" id={driver.id} />
+  </TableCell>;
+
+  // The AddRemoveFavorites component uses React's useOptimistic for immediate UI updates:
+  const handleSubmit = async (id: string, type: string) => {
+    changeOptimisticIsFavorite(!optimisticIsFavorite);
+    startTransition(async () => {
+      await addOrRemoveFromFavorites(type, id);
+      await user?.reload();
+    });
+  };
   ```
 
 ## View Transitions
@@ -351,3 +366,45 @@ This project is for educational and practice purposes only. It is not affiliated
 ## Project Status
 
 🚧 Under development 🚧
+
+## Screenshots
+
+A continuación se muestran capturas de pantalla de las principales secciones de la aplicación:
+
+### Página de Inicio (Home)
+
+![Página de Inicio](public/images/home.png)
+_Página principal mostrando la tabla de posiciones de pilotos, equipos y el próximo Gran Premio_
+
+### Página de Calendario (Schedule)
+
+![Página de Calendario](public/images/schedule.png)
+_Calendario completo de la temporada 2025 de F1 con todos los Grandes Premios_
+
+### Página de Estadísticas (Statistics)
+
+![Página de Estadísticas](public/images/statistics.png)
+_Estadísticas detalladas de pilotos con posiciones en el campeonato_
+
+### Página de Información del Piloto
+
+![Información del Piloto](public/images/driver-info.png)
+_Página de información detallada del piloto Oscar Piastri_
+
+### Página de Información del Equipo
+
+![Información del Equipo](public/images/team-info.png)
+_Página de información detallada del equipo McLaren_
+
+### Funcionalidad de Favoritos
+
+La aplicación permite agregar pilotos y equipos a favoritos, como se muestra en los botones de corazón en las tablas y páginas de información.
+
+> **Nota**: Las capturas de pantalla muestran datos ficticios para propósitos de demostración. La información real se actualiza mediante web scraping de fuentes oficiales.
+
+---
+
+> **Para agregar tus propias capturas**:
+>
+> 1. Guarda las capturas de pantalla en la carpeta `public/images/`
+> 2. Actualiza las rutas en este README
