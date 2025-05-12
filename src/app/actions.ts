@@ -1,6 +1,8 @@
+'use server';
+
 import { auth, clerkClient } from '@clerk/nextjs/server';
 
-export const addOrRemoveFromFavorites = async (formData: FormData) => {
+export const addOrRemoveFromFavorites = async (type: string, id: string) => {
   const { userId, sessionClaims } = await auth();
 
   if (!userId) {
@@ -12,19 +14,20 @@ export const addOrRemoveFromFavorites = async (formData: FormData) => {
   let currentUserFavoriteTeams = (sessionClaims?.metadata?.favoriteTeams as string[]) || [];
   let currentUserFavoriteDrivers = (sessionClaims?.metadata?.favoriteDrivers as string[]) || [];
 
-  const team = formData.get('teamId') as string;
-  const driver = formData.get('driverId') as string;
-
-  if (currentUserFavoriteTeams.includes(team)) {
-    currentUserFavoriteTeams = currentUserFavoriteTeams.filter((t) => t !== team);
-  } else {
-    currentUserFavoriteTeams.push(team);
+  if (type === 'team') {
+    if (currentUserFavoriteTeams.includes(id)) {
+      currentUserFavoriteTeams = currentUserFavoriteTeams.filter((t) => t !== id);
+    } else {
+      currentUserFavoriteTeams.push(id);
+    }
   }
 
-  if (currentUserFavoriteDrivers.includes(driver)) {
-    currentUserFavoriteDrivers = currentUserFavoriteDrivers.filter((d) => d !== driver);
-  } else {
-    currentUserFavoriteDrivers.push(driver);
+  if (type === 'driver') {
+    if (currentUserFavoriteDrivers.includes(id)) {
+      currentUserFavoriteDrivers = currentUserFavoriteDrivers.filter((d) => d !== id);
+    } else {
+      currentUserFavoriteDrivers.push(id);
+    }
   }
 
   try {
