@@ -25,7 +25,7 @@ export function AddRemoveFavorites({ type, id, className }: AddRemoveFavoritesPr
     if (type === 'driver') {
       setIsFavorite(metadata?.favoriteDrivers?.includes(id) ?? false);
     }
-  }, [metadata]);
+  }, [metadata, type, id]);
 
   const handleSubmit = async (id: string, type: string) => {
     changeOptimisticIsFavorite(!optimisticIsFavorite);

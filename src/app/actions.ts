@@ -39,6 +39,7 @@ export const addOrRemoveFromFavorites = async (type: string, id: string) => {
     });
     return { message: res.publicMetadata };
   } catch (err) {
+    console.error(err);
     return { error: 'There was an error updating the user metadata.' };
   }
 };

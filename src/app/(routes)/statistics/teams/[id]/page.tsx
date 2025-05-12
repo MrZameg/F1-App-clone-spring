@@ -1,5 +1,3 @@
-import { getDriverInfo, getDriverStatistics } from '@/lib/getDrivers';
-import Image from 'next/image';
 import {
   Table,
   TableBody,

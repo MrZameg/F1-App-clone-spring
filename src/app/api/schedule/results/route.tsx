@@ -46,11 +46,9 @@ export async function GET(request: Request) {
     } else {
       return NextResponse.json({ error: 'No sessionId or circuitId provided' }, { status: 400 });
     }
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message || 'An unknown error occurred' },
-      { status: 500 }
-    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: 'An unknown error occurred' }, { status: 500 });
   } finally {
     await browser.close();
   }

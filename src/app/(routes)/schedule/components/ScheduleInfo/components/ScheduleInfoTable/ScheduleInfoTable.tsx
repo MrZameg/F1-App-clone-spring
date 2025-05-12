@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
-import { ScheduleInfoProps } from '../../../ScheduleInfo.types';
+import { ScheduleInfoProps } from '../../ScheduleInfo.types';
 
 export default function ScheduleInfoTable({ circuitInfo }: ScheduleInfoProps) {
   return (
