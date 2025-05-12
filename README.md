@@ -369,42 +369,37 @@ This project is for educational and practice purposes only. It is not affiliated
 
 ## Screenshots
 
-A continuación se muestran capturas de pantalla de las principales secciones de la aplicación:
+Below are screenshots of the main sections of the application:
 
-### Página de Inicio (Home)
+### Home Page
 
-![Página de Inicio](public/images/home.png)
-_Página principal mostrando la tabla de posiciones de pilotos, equipos y el próximo Gran Premio_
+![Home Page](public/images/home.png)
+_Home page displaying drivers standings, teams standings, and the next Grand Prix_
 
-### Página de Calendario (Schedule)
+### Schedule Page
 
-![Página de Calendario](public/images/schedule.png)
-_Calendario completo de la temporada 2025 de F1 con todos los Grandes Premios_
+![Schedule Page](public/images/schedule.png)
+_Complete F1 2025 season calendar with all Grand Prix events_
 
-### Página de Estadísticas (Statistics)
+### Statistics Page
 
-![Página de Estadísticas](public/images/statistics.png)
-_Estadísticas detalladas de pilotos con posiciones en el campeonato_
+![Statistics Page](public/images/statistics.png)
+_Detailed driver statistics with championship standings_
 
-### Página de Información del Piloto
+### Driver Info Page
 
-![Información del Piloto](public/images/driver-info.png)
-_Página de información detallada del piloto Oscar Piastri_
+![Driver Info](public/images/driver-info.png)
+_Detailed information page for driver Oscar Piastri_
 
-### Página de Información del Equipo
+### Team Info Page
 
-![Información del Equipo](public/images/team-info.png)
-_Página de información detallada del equipo McLaren_
+![Team Info](public/images/team-info.png)
+_Detailed information page for team McLaren_
 
-### Funcionalidad de Favoritos
+### Favorites Feature
 
-La aplicación permite agregar pilotos y equipos a favoritos, como se muestra en los botones de corazón en las tablas y páginas de información.
+The application allows users to add drivers and teams to favorites, as shown by the heart buttons in the tables and information pages.
 
-> **Nota**: Las capturas de pantalla muestran datos ficticios para propósitos de demostración. La información real se actualiza mediante web scraping de fuentes oficiales.
+> **Note**: The screenshots display real data obtained directly from the official Formula 1 website through web scraping, ensuring up-to-date and accurate information.
 
 ---
-
-> **Para agregar tus propias capturas**:
->
-> 1. Guarda las capturas de pantalla en la carpeta `public/images/`
-> 2. Actualiza las rutas en este README
