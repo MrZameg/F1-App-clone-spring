@@ -3,6 +3,7 @@ import { Rajdhani } from 'next/font/google';
 import './globals.css';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from 'sonner';
 
 const rajdhani = Rajdhani({
   weight: ['400', '500', '600', '700'],
@@ -30,6 +31,7 @@ export default function RootLayout({
           <SidebarProvider>
             <SidebarTrigger />
             <main className="w-full">{children}</main>
+            <Toaster />
           </SidebarProvider>
         </body>
       </html>

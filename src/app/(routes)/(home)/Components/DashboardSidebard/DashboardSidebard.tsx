@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/sidebar';
 import { SidebarGroupLabel } from '@/components/ui/sidebar';
 import { Sidebar, SidebarContent, SidebarGroup } from '@/components/ui/sidebar';
-import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
+import { SignInButton, useClerk, useUser } from '@clerk/nextjs';
 import {
   Calendar,
   ChartNoAxesColumn,
@@ -24,10 +24,21 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { toast } from 'sonner';
 
 export function DashboardSidebard() {
   const pathname = usePathname();
   const { user } = useUser();
+  const { signOut } = useClerk();
+
+  const handleSignOut = () => {
+    signOut(() => {
+      toast('Successfully signed out', {
+        description: 'See you next time!',
+        position: 'top-center',
+      });
+    });
+  };
 
   return (
     <Sidebar>
@@ -155,16 +166,15 @@ export function DashboardSidebard() {
       </SidebarContent>
       {user && (
         <SidebarFooter className="py-4">
-          <SignOutButton redirectUrl="/">
-            <Button
-              variant="destructive"
-              size="icon"
-              className="flex items-center gap-2 cursor-pointer w-full py-2 px-4 hover:font-bold"
-            >
-              <LogOutIcon />
-              <span className="text-lg">Logout</span>
-            </Button>
-          </SignOutButton>
+          <Button
+            variant="destructive"
+            size="icon"
+            className="flex items-center gap-2 cursor-pointer w-full py-2 px-4 hover:font-bold"
+            onClick={handleSignOut}
+          >
+            <LogOutIcon />
+            <span className="text-lg">Logout</span>
+          </Button>
         </SidebarFooter>
       )}
     </Sidebar>

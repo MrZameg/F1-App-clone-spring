@@ -6,6 +6,7 @@ import { useAuth } from '@clerk/clerk-react';
 import { startTransition, useEffect, useOptimistic, useState } from 'react';
 import { HeartIcon } from 'lucide-react';
 import { addOrRemoveFromFavorites } from '@/app/actions';
+import { toast } from 'sonner';
 
 export function AddRemoveFavorites({ type, id, className }: AddRemoveFavoritesProps) {
   const { user } = useUser();
@@ -32,6 +33,11 @@ export function AddRemoveFavorites({ type, id, className }: AddRemoveFavoritesPr
     startTransition(async () => {
       await addOrRemoveFromFavorites(type, id);
       await user?.reload();
+      if (optimisticIsFavorite) {
+        toast(`${type.charAt(0).toUpperCase() + type.slice(1)} removed from favorites`);
+      } else {
+        toast(`${type.charAt(0).toUpperCase() + type.slice(1)} added to favorites`);
+      }
     });
   };
 
