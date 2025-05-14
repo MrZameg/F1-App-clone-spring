@@ -41,18 +41,20 @@ export function AddRemoveFavorites({ type, id, className }: AddRemoveFavoritesPr
     });
   };
 
-  return (
-    <form
-      action={() => handleSubmit(id, type)}
-      className={`flex justify-center items-center p-2 w-fit border border-gray-300 rounded-md ${className}`}
-    >
-      <button type="submit" className="cursor-pointer">
-        {isFavorite ? (
-          <HeartIcon className="fill-white hover:fill-gray-300 transition-all duration-300 hover:opacity-80" />
-        ) : (
-          <HeartIcon className="hover:fill-white transition-all duration-300 hover:opacity-80" />
-        )}
-      </button>
-    </form>
-  );
+  if (user) {
+    return (
+      <form
+        action={() => handleSubmit(id, type)}
+        className={`flex justify-center items-center p-2 w-fit border border-gray-300 rounded-md ${className}`}
+      >
+        <button type="submit" className="cursor-pointer">
+          {isFavorite ? (
+            <HeartIcon className="fill-white hover:fill-gray-300 transition-all duration-300 hover:opacity-80" />
+          ) : (
+            <HeartIcon className="hover:fill-white transition-all duration-300 hover:opacity-80" />
+          )}
+        </button>
+      </form>
+    );
+  }
 }
