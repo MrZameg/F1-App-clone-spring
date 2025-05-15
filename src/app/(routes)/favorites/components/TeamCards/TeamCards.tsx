@@ -1,6 +1,6 @@
 import { TeamCardsProps } from './TeamCards.types';
 import { TeamFavortieCard } from '../TeamFavortieCard';
-import { getTeamInfo, getTeams, getTeamsStatistics } from '@/lib/getTeams';
+import { getTeams, getTeamsStatistics } from '@/lib/getTeams';
 
 export async function TeamCards({ favoriteTeams }: TeamCardsProps) {
   const teams = await getTeams();
