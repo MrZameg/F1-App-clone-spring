@@ -9,7 +9,7 @@ interface Driver {
   country: string;
 }
 
-interface DriversStatistics {
+export interface DriversStatistics {
   position: string;
   driver: {
     id: string;
