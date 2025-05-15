@@ -12,7 +12,7 @@ export default async function FavoritesPage() {
   return (
     <div className="w-full max-w-7xl mx-auto">
       <h1 className="text-4xl font-bold mt-4 mb-12 text-center">
-        The favorties of {user?.firstName}
+        The favorites of {user?.firstName} {user?.lastName}
       </h1>
 
       <div className="w-full flex flex-col gap-10">
