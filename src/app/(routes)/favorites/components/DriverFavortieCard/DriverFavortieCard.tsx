@@ -1,6 +1,7 @@
 import { getDriverInfo, getDriverStatistics } from '@/lib/getDrivers';
 import { DriverFavortieCardProps } from './DriverFavortieCard.types';
 import Image from 'next/image';
+import { DriverChart } from '../DriverChart';
 
 export async function DriverFavortieCard({ driverId, driverStatistics }: DriverFavortieCardProps) {
   const driver = await getDriverInfo(driverId);
@@ -10,10 +11,8 @@ export async function DriverFavortieCard({ driverId, driverStatistics }: DriverF
     new Date().getFullYear().toString()
   );
 
-  console.log(driverResults?.driverResults);
-
   return (
-    <div className="flex w-full flex-col md:flex-row gap-3 ">
+    <div className="flex w-full flex-col md:flex-row gap-3  not-last:border-b border-border py-5">
       <div className="w-full md:w-1/2 flex items-center gap-2">
         <Image
           src={driver?.driverImageUrl || ''}
@@ -36,7 +35,9 @@ export async function DriverFavortieCard({ driverId, driverStatistics }: DriverF
           <p className="text-sm">Points: {driverStatistics?.points}</p>
         </div>
       </div>
-      <div className="w-full md:w-1/2"> Drivers chart </div>
+      <div className="w-full md:w-1/2">
+        <DriverChart driverResults={driverResults?.driverResults || null} />
+      </div>
     </div>
   );
 }

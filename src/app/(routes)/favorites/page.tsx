@@ -14,7 +14,7 @@ export default async function FavoritesPage() {
         The favorties of {user?.firstName}
       </h1>
 
-      <div className="w-full flex flex-col gap-3 border border-gray-200 rounded-lg p-2">
+      <div className="w-full flex flex-col gap-3 border border-border rounded-lg p-2">
         <DriverCards favoriteDrivers={favoriteDrivers} />
       </div>
 

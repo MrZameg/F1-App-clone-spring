@@ -52,7 +52,7 @@ export interface DriverStatistics {
   driverResults: DriverStatisticResult[];
 }
 
-interface DriverStatisticResult {
+export interface DriverStatisticResult {
   grandPrix: {
     name: string;
     season: string;
