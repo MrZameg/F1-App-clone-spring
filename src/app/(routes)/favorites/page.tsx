@@ -1,5 +1,6 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { DriverCards } from './components/DriverCards';
+import { TeamCards } from './components/TeamCards';
 
 export default async function FavoritesPage() {
   const user = await currentUser();
@@ -14,11 +15,15 @@ export default async function FavoritesPage() {
         The favorties of {user?.firstName}
       </h1>
 
-      <div className="w-full flex flex-col gap-3 border border-border rounded-lg p-2">
-        <DriverCards favoriteDrivers={favoriteDrivers} />
-      </div>
+      <div className="w-full flex flex-col gap-10">
+        <div className="w-full flex flex-col gap-3 border border-border rounded-lg p-2">
+          <DriverCards favoriteDrivers={favoriteDrivers} />
+        </div>
 
-      <div>Teams</div>
+        <div className="w-full flex flex-col gap-3 border border-border rounded-lg p-2">
+          <TeamCards favoriteTeams={favoriteTeams} />
+        </div>
+      </div>
     </div>
   );
 }

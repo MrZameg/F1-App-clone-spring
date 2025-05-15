@@ -47,7 +47,7 @@ export interface TeamsStatistics {
   teamResults: TeamStatisticResult[];
 }
 
-interface TeamStatisticResult {
+export interface TeamStatisticResult {
   grandPrix: {
     name: string;
     season: string;
