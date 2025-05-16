@@ -382,6 +382,13 @@ This project is for educational and practice purposes only. It is not affiliated
 
 🚧 Under development 🚧
 
+### Pending Tasks
+
+The following features are planned for future development:
+
+- **Mobile Responsive Design**: Optimize the application for mobile devices and different screen sizes
+- **API Migration**: Move the API endpoints to an external service for better scalability and performance
+
 ## Screenshots
 
 Below are screenshots of the main sections of the application:
