@@ -219,7 +219,7 @@ The information is obtained ethically and respecting the terms of use and robots
 - Landing page with featured content
 - Displays next race countdown, latest news, and highlights
 - Quick access to drivers' and teams' standings
-- Components:
+- Features:
   - Race countdown timer
   - Position tables for drivers and teams
   - Featured content carousel
@@ -231,7 +231,7 @@ The information is obtained ethically and respecting the terms of use and robots
 - Displays the complete F1 2025 season calendar
 - Shows all race dates, circuits, and countries
 - Race results available for completed races
-- Components:
+- Features:
   - Schedule calendar
   - Circuit cards
 
@@ -240,6 +240,7 @@ The information is obtained ethically and respecting the terms of use and robots
 - Detailed information about a specific race
 - Shows circuit layout, race times, and results (if available)
 - Includes historical data and track information
+- Dynamic routing based on race ID
 
 ### Statistics Pages
 
@@ -249,17 +250,19 @@ The information is obtained ethically and respecting the terms of use and robots
 - Driver and constructor standings
 - Performance metrics and comparison tools
 
-#### Drivers Statistics Page (/statistics/drivers)
+#### Drivers Statistics Pages (/statistics/drivers/...)
 
 - Detailed driver standings and performance metrics
 - Comparison tools for driver performance
 - Points progression throughout the season
+- Dynamic routing for individual driver statistics
 
-#### Teams Statistics Page (/statistics/teams)
+#### Teams Statistics Pages (/statistics/teams/...)
 
 - Constructor championship standings
 - Team performance metrics
 - Points progression throughout the season
+- Dynamic routing for individual team statistics
 
 ### History Page (/history)
 
@@ -274,7 +277,8 @@ The information is obtained ethically and respecting the terms of use and robots
 - Detailed profile for individual drivers
 - Career statistics, biography, and current season performance
 - Media gallery and latest news
-- Components:
+- Dynamic routing based on driver ID
+- Features:
   - Driver profile header
   - Statistics dashboard
   - Career timeline
@@ -285,11 +289,22 @@ The information is obtained ethically and respecting the terms of use and robots
 - Comprehensive team profiles
 - Technical specifications of current car
 - Team history, achievements, and current driver lineup
-- Components:
+- Dynamic routing based on team ID
+- Features:
   - Team profile header
   - Car specifications
   - Driver cards
   - Team history timeline
+
+### Favorites Page (/favorites)
+
+- User-specific page for saved favorites
+- Requires authentication
+- Displays user's favorite drivers and teams
+- Features:
+  - Add/remove favorites functionality
+  - Quick access to detailed driver and team information
+  - Personalized content based on user preferences
 
 ## Server Actions
 
@@ -367,38 +382,56 @@ This project is for educational and practice purposes only. It is not affiliated
 
 🚧 Under development 🚧
 
+### Pending Tasks
+
+The following features are planned for future development:
+
+- **Mobile Responsive Design**: Optimize the application for mobile devices and different screen sizes
+- **API Migration**: Move the API endpoints to an external service for better scalability and performance
+
 ## Screenshots
 
 Below are screenshots of the main sections of the application:
 
 ### Home Page
 
-![Home Page](public/images/home.png)
+![Home Page](public/images/homepage.png)
 _Home page displaying drivers standings, teams standings, and the next Grand Prix_
 
 ### Schedule Page
 
-![Schedule Page](public/images/schedule.png)
+![Schedule Page](public/images/schedulePage.png)
 _Complete F1 2025 season calendar with all Grand Prix events_
+
+### Schedule Info Page
+
+![Schedule Info Page](public/images/scheduleInfoPage.png)
+_Detailed information about a specific Grand Prix_
 
 ### Statistics Page
 
-![Statistics Page](public/images/statistics.png)
+![Statistics Page](public/images/statisticsPage.png)
 _Detailed driver statistics with championship standings_
 
-### Driver Info Page
+### Driver Page
 
-![Driver Info](public/images/driver-info.png)
-_Detailed information page for driver Oscar Piastri_
+![Driver Page](public/images/driverPage.png)
+_Detailed information page for a selected driver_
 
-### Team Info Page
+### Team Page
 
-![Team Info](public/images/team-info.png)
-_Detailed information page for team McLaren_
+![Team Page](public/images/TeamPage.png)
+_Detailed information page for a selected team_
 
-### Favorites Feature
+### Favorites Page
 
-The application allows users to add drivers and teams to favorites, as shown by the heart buttons in the tables and information pages.
+![Favorites Page](public/images/favoritesPage.png)
+_User's favorite drivers and teams page_
+
+### Login Page
+
+![Login Page](public/images/loginPage.png)
+_Authentication page for user login_
 
 > **Note**: The screenshots display real data obtained directly from the official Formula 1 website through web scraping, ensuring up-to-date and accurate information.
 

@@ -9,7 +9,7 @@ interface Driver {
   country: string;
 }
 
-interface DriversStatistics {
+export interface DriversStatistics {
   position: string;
   driver: {
     id: string;
@@ -52,7 +52,7 @@ export interface DriverStatistics {
   driverResults: DriverStatisticResult[];
 }
 
-interface DriverStatisticResult {
+export interface DriverStatisticResult {
   grandPrix: {
     name: string;
     season: string;

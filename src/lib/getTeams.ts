@@ -1,4 +1,4 @@
-interface Team {
+export interface Team {
   id: string;
   name: string;
   position: string;
@@ -47,7 +47,7 @@ export interface TeamsStatistics {
   teamResults: TeamStatisticResult[];
 }
 
-interface TeamStatisticResult {
+export interface TeamStatisticResult {
   grandPrix: {
     name: string;
     season: string;

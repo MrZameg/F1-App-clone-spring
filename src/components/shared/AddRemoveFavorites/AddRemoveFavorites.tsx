@@ -6,6 +6,7 @@ import { useAuth } from '@clerk/clerk-react';
 import { startTransition, useEffect, useOptimistic, useState } from 'react';
 import { HeartIcon } from 'lucide-react';
 import { addOrRemoveFromFavorites } from '@/app/actions';
+import { toast } from 'sonner';
 
 export function AddRemoveFavorites({ type, id, className }: AddRemoveFavoritesProps) {
   const { user } = useUser();
@@ -32,21 +33,28 @@ export function AddRemoveFavorites({ type, id, className }: AddRemoveFavoritesPr
     startTransition(async () => {
       await addOrRemoveFromFavorites(type, id);
       await user?.reload();
+      if (optimisticIsFavorite) {
+        toast(`${type.charAt(0).toUpperCase() + type.slice(1)} removed from favorites`);
+      } else {
+        toast(`${type.charAt(0).toUpperCase() + type.slice(1)} added to favorites`);
+      }
     });
   };
 
-  return (
-    <form
-      action={() => handleSubmit(id, type)}
-      className={`flex justify-center items-center p-2 w-fit border border-gray-300 rounded-md ${className}`}
-    >
-      <button type="submit" className="cursor-pointer">
-        {isFavorite ? (
-          <HeartIcon className="fill-white hover:fill-gray-300 transition-all duration-300 hover:opacity-80" />
-        ) : (
-          <HeartIcon className="hover:fill-white transition-all duration-300 hover:opacity-80" />
-        )}
-      </button>
-    </form>
-  );
+  if (user) {
+    return (
+      <form
+        action={() => handleSubmit(id, type)}
+        className={`flex justify-center items-center p-2 w-fit border border-gray-300 rounded-md ${className}`}
+      >
+        <button type="submit" className="cursor-pointer">
+          {isFavorite ? (
+            <HeartIcon className="fill-white hover:fill-gray-300 transition-all duration-300 hover:opacity-80" />
+          ) : (
+            <HeartIcon className="hover:fill-white transition-all duration-300 hover:opacity-80" />
+          )}
+        </button>
+      </form>
+    );
+  }
 }

@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/table';
 import Link from 'next/link';
 import { getTeamStatistics } from '@/lib/getTeams';
+import GoBackPage from '@/components/shared/GoBackPage/GoBackPage';
 
 export default async function page({
   params,
@@ -24,6 +25,9 @@ export default async function page({
 
   return (
     <div className="flex flex-col justify-center pt-12">
+      <div className="mb-4">
+        <GoBackPage href="/statistics" text="Back to statistics" />
+      </div>
       <div className="flex items-center gap-5">
         <h1 className="flex items-center gap-2 text-2xl font-bold">
           Results for {teamResults?.teamName} in {season}
