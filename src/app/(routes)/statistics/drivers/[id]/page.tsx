@@ -10,6 +10,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import Link from 'next/link';
+import { unstable_ViewTransition as ViewTransition } from 'react';
+import GoBackPage from '@/components/shared/GoBackPage/GoBackPage';
+import { getTeams, Team } from '@/lib/getTeams';
+import GoTeamPage from '@/components/shared/GoTeamPage/GoTeamPage';
 
 export default async function page({
   params,
@@ -23,17 +27,33 @@ export default async function page({
 
   const driverResults = await getDriverStatistics(id, driverId, season || '2025');
   const driver = await getDriverInfo(id);
+  let teams: Team[] | null = null;
+  let teamId: string | undefined = undefined;
+  if (driver) {
+    teams = await getTeams();
+    teamId = teams?.find((team) => team.name === driver.team)?.id;
+  }
 
   return (
     <div className="flex flex-col justify-center pt-12">
+      <div className="flex items-center mb-4 gap-20">
+        {season === new Date().getFullYear().toString() || season === null ? (
+          <GoBackPage href="/statistics" text="Back to statistics" />
+        ) : (
+          <GoBackPage href="/history" text="Back to history page" />
+        )}
+        {teamId && <GoTeamPage teamId={teamId} />}
+      </div>
       <div className="flex items-center gap-5">
         {driver?.driverImageUrl && (
-          <Image
-            src={driver?.driverImageUrl || ''}
-            alt={driver?.name || ''}
-            width={200}
-            height={200}
-          />
+          <ViewTransition name={`driver-image-${driver.id}`}>
+            <Image
+              src={driver?.driverImageUrl || ''}
+              alt={driver?.name || ''}
+              width={200}
+              height={200}
+            />
+          </ViewTransition>
         )}
         <h1 className="flex items-center gap-2 text-2xl font-bold">
           Results for {driver?.name || driverResults?.driverName} in {season}

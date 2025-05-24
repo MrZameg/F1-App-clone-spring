@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Rajdhani } from 'next/font/google';
 import './globals.css';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from 'sonner';
 
 const rajdhani = Rajdhani({
   weight: ['400', '500', '600', '700'],
@@ -28,8 +29,9 @@ export default function RootLayout({
         </head>
         <body className={`${rajdhani.variable} antialiased dark`}>
           <SidebarProvider>
-            <SidebarTrigger />
+            {/* <SidebarTrigger /> */}
             <main className="w-full">{children}</main>
+            <Toaster />
           </SidebarProvider>
         </body>
       </html>
